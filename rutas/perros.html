@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas con perros - Rutas País Vasco</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos para la lista de rutas con perros y sus botones de mapa */
+        .cuadro-historia ol > li > ul > li { /* Selecciona los <li> de las rutas específicas */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Mejor para texto que puede envolver */
+            margin-bottom: 1em;
+            padding-bottom: 0.8em;
+            border-bottom: 1px dashed #ccc;
+        }
+        .darkmode .cuadro-historia ol > li > ul > li {
+            border-bottom-color: #555;
+        }
+        .cuadro-historia ol > li > ul > li:last-child {
+            border-bottom: none; /* No border for the last item */
+        }
+
+        .cuadro-historia ol > li > ul > li .activity-text { /* Para el texto de la ruta */
+            flex-grow: 1;
+            margin-right: 10px; /* Espacio entre el texto y el botón */
+        }
+
+        .map-link-btn-inline { /* Clase para los botones de mapa en línea */
+            padding: 0.4em 0.7em;
+            font-size: 1em;
+            margin-left: auto; /* Empuja el botón a la derecha */
+        }
+    </style>
+</head>
+<body class="darkmode">
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava"><img src="../img/mapa_alava.png" alt="Álava" /><span>Álava</span></a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia"><img src="../img/mapa_bizkaia.png" alt="Bizkaia" /><span>Bizkaia</span></a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa"><img src="../img/mapa_gipuzkoa.png" alt="Gipuzkoa" /><span>Gipuzkoa</span></a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra"><img src="../img/mapa_navarra.png" alt="Navarra" /><span>Navarra</span></a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria"><img src="../img/mapa_cantabria.png" alt="Cantabria" /><span>Cantabria</span></a>
+    </aside>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='../index.html'" data-key="navHome">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="pareja.html" data-key="navPareja">En pareja</a></li>
+                <li><a href="perros.html" class="active" data-key="navPerros">Con perros</a></li>
+                <li><a href="niños.html" data-key="navNinos">Con niños</a></li>
+                <li><a href="escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="skate.html" data-key="navSkate">Skate</a></li>
+                <li><a href="gastronomia.html" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button>
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/Rutas-Pais-Vasco" target="_blank" rel="noopener noreferrer">Rutas País Vasco (Este Proyecto)</a>
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">Mi Perfil Principal</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">Mi Web Personal (web2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="window.location.href='mailto:tartemugiocursojava@gmail.com'" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title" data-key="mainTitlePerros">Rutas para visitar con perros</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+        </div>
+    </header>
+    <main>
+        <p data-key="introPerros">Rutas para visitar con perros en el País Vasco, Navarra y Cantabria</p>
+        <div class="cuadro-historia">
+            <p data-key="descPerros1">
+                Si viajas con tu mascota, estas regiones del norte de España ofrecen paisajes increíbles, senderos bien señalizados y espacios pet-friendly. Aquí te dejamos algunas de las mejores rutas y destinos para disfrutar con tu perro en País Vasco, Navarra y Cantabria.
+            </p>
+            <ol data-key="listaRegionesPerros">
+                <!-- Contenido generado por JS -->
+            </ol>
+            <h3 data-key="tituloConsejosPerros">📌 Consejos para viajar con perros</h3>
+            <ul data-key="listaConsejosPerros">
+                <!-- Contenido generado por JS -->
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>© 2022 - Rutas País Vasco-AUPACHUS</p>
+    </footer>
+    <script src="../js/background.js" defer></script>
+    <script src="../js/dropdown.js" defer></script>
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            navHome: "Inicio",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            navRepos: "Mis Repositorios ▼",
+            mainTitlePerros: "Rutas para visitar con perros",
+            introPerros: "Rutas para visitar con perros en el País Vasco, Navarra y Cantabria",
+            descPerros1: "Si viajas con tu mascota, estas regiones del norte de España ofrecen paisajes increíbles, senderos bien señalizados y espacios pet-friendly. Aquí te dejamos algunas de las mejores rutas y destinos para disfrutar con tu perro en País Vasco, Navarra y Cantabria.",
+            listaRegionesPerros: `
+                <li>
+                    <strong data-key="regionPV">País Vasco</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Monte Urgull (San Sebastián)</strong><br>Distancia: 3 km (circular)<br>Dificultad: Fácil<br>Características: Paseo por un parque urbano con vistas al mar y a la ciudad. Ideal para un recorrido corto y panorámico.</span><a href="https://www.google.com/maps/search/Monte+Urgull+San+Sebastián" target="_blank" rel="noopener noreferrer" title="Ver Monte Urgull en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Parque Natural de Gorbeia (Álava/Bizkaia)</strong><br>Ruta: Subida al monte Gorbeia (1.482 m)<br>Distancia: 12 km (ida y vuelta)<br>Dificultad: Media<br>Características: Bosques frondosos y paisajes verdes. Hay zonas con agua para que el perro se refresque.</span><a href="https://www.google.com/maps/search/Parque+Natural+Gorbeia+acceso" target="_blank" rel="noopener noreferrer" title="Ver Gorbeia en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Playa de Laida (Urdaibai, Bizkaia)</strong><br>Tipo: Playa pet-friendly (fuera de temporada alta)<br>Características: Arena fina y oleaje suave. Ideal para correr y jugar con tu perro.</span><a href="https://www.google.com/maps/search/Playa+de+Laida+Urdaibai" target="_blank" rel="noopener noreferrer" title="Ver Playa de Laida en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Bosque de Oma (Kortezubi, Bizkaia)</strong><br>Distancia: 3 km (circular)<br>Dificultad: Fácil<br>Características: Un bosque mágico con árboles pintados por Agustín Ibarrola. Perfecto para fotos con tu mascota.</span><a href="https://www.google.com/maps/search/Bosque+de+Oma+Kortezubi" target="_blank" rel="noopener noreferrer" title="Ver Bosque de Oma en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionNavarra">Navarra</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Selva de Irati (Ori)</strong><br>Ruta: Sendero de la Cascada de Cubo<br>Distancia: 5 km (circular)<br>Dificultad: Fácil<br>Características: Uno de los bosques más bonitos de España, con hayedos y ríos. Ideal para perros activos.</span><a href="https://www.google.com/maps/search/Selva+de+Irati+Cascada+del+Cubo" target="_blank" rel="noopener noreferrer" title="Ver Selva de Irati en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Foz de Arbaiun</strong><br>Ruta: Mirador de Iso<br>Distancia: 2 km (ida y vuelta)<br>Dificultad: Fácil<br>Características: Cañón espectacular con buitres sobrevolando. Ideal para fotos con vistas.</span><a href="https://www.google.com/maps/search/Mirador+de+Iso+Foz+de+Arbaiun" target="_blank" rel="noopener noreferrer" title="Ver Foz de Arbaiun en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Bardenas Reales</strong><br>Ruta: Paseo por Castildetierra<br>Distancia: 4 km (circular)<br>Dificultad: Fácil<br>Características: Paisaje desértico único. Lleva agua para tu perro, ya que no hay sombra.</span><a href="https://www.google.com/maps/search/Castildetierra+Bardenas+Reales" target="_blank" rel="noopener noreferrer" title="Ver Bardenas Reales en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Parque Fluvial del Arga (Pamplona)</strong><br>Distancia: 11 km (lineal)<br>Dificultad: Fácil<br>Características: Paseo junto al río, con zonas de descanso y fuentes.</span><a href="https://www.google.com/maps/search/Parque+Fluvial+del+Arga+Pamplona" target="_blank" rel="noopener noreferrer" title="Ver Parque Fluvial del Arga en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionCantabria">Cantabria</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Parque Natural de Oyambre (San Vicente de la Barquera)</strong><br>Ruta: Paseo por las playas de Merón y Oyambre<br>Distancia: 6 km (circular)<br>Dificultad: Fácil<br>Características: Playas pet-friendly y dunas. Ideal para perros que adoran el mar.</span><a href="https://www.google.com/maps/search/Parque+Natural+de+Oyambre" target="_blank" rel="noopener noreferrer" title="Ver Parque Natural de Oyambre en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Río Asón (Valles Pasiegos)</strong><br>Ruta: Cascada del Asón<br>Distancia: 4 km (ida y vuelta)<br>Dificultad: Media<br>Características: Cascada impresionante y bosques frondosos.</span><a href="https://www.google.com/maps/search/Cascada+del+Asón" target="_blank" rel="noopener noreferrer" title="Ver Cascada del Asón en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Monte Dobra (Torrelavega)</strong><br>Distancia: 6 km (circular)<br>Dificultad: Media<br>Características: Vistas panorámicas de Cantabria. Ideal para perros con energía.</span><a href="https://www.google.com/maps/search/Monte+Dobra+Torrelavega" target="_blank" rel="noopener noreferrer" title="Ver Monte Dobra en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Playa de Berellín (Liencres)</strong><br>Tipo: Playa pet-friendly todo el año<br>Características: Arena dorada y poco frecuentada, perfecta para perros juguetones.</span><a href="https://www.google.com/maps/search/Playa+de+Berellín+Liencres" target="_blank" rel="noopener noreferrer" title="Ver Playa de Berellín en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+            `,
+            tituloConsejosPerros: "📌 Consejos para viajar con perros",
+            listaConsejosPerros: `
+                <li>✅ Correa obligatoria en espacios naturales protegidos.</li>
+                <li>✅ Lleva agua y recipiente plegable.</li>
+                <li>✅ Respeta las normativas de playas (horarios y zonas permitidas).</li>
+                <li>✅ Evita horas de mucho calor en verano.</li>
+                <li>✅ Busca alojamientos pet-friendly (muchos caseríos y hoteles rurales los aceptan).</li>
+            `,
+            regionPV: "País Vasco",
+            regionNavarra: "Navarra",
+            regionCantabria: "Cantabria"
+        },
+        eu: {
+            navHome: "Hasiera",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            navRepos: "Nire Biltegiak ▼",
+            mainTitlePerros: "Txakurrekin bisitatzeko ibilbideak",
+            introPerros: "Txakurrekin bisitatzeko ibilbideak Euskal Herrian, Nafarroan eta Kantabrian",
+            descPerros1: "Zure maskotarekin bidaiatzen baduzu, Espainiako iparraldeko eskualde hauek paisaia ikaragarriak, ondo seinaleztatutako bidezidorrak eta maskotentzako tokiak eskaintzen dituzte. Hona hemen Euskal Herrian, Nafarroan eta Kantabrian zure txakurrarekin gozatzeko ibilbide eta helmuga onenetako batzuk.",
+            listaRegionesPerros: `
+                <li>
+                    <strong data-key="regionPV">Euskal Herria</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Urgull Mendia (Donostia)</strong><br>Distantzia: 3 km (zirkularra)<br>Zailtasuna: Erraza<br>Ezaugarriak: Hiri-parke batean zeharreko paseoa, itsasoaren eta hiriaren bistekin. Ibilbide labur eta panoramiko baterako aproposa.</span><a href="https://www.google.com/maps/search/Monte+Urgull+San+Sebastián" target="_blank" rel="noopener noreferrer" title="Ikusi Urgull Mendia Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Gorbeiako Parke Naturala (Araba/Bizkaia)</strong><br>Ibilbidea: Gorbeia mendira igotzea (1.482 m)<br>Distantzia: 12 km (joan-etorria)<br>Zailtasuna: Ertaina<br>Ezaugarriak: Baso hostotsuak eta paisaia berdeak. Txakurrak freskatzeko ur-guneak daude.</span><a href="https://www.google.com/maps/search/Parque+Natural+Gorbeia+acceso" target="_blank" rel="noopener noreferrer" title="Ikusi Gorbeia Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Laidako Hondartza (Urdaibai, Bizkaia)</strong><br>Mota: Maskotentzako hondartza (goi-denboralditik kanpo)<br>Ezaugarriak: Harea fina eta olatu leunak. Zure txakurrarekin korrika egiteko eta jolasteko aproposa.</span><a href="https://www.google.com/maps/search/Playa+de+Laida+Urdaibai" target="_blank" rel="noopener noreferrer" title="Ikusi Laidako Hondartza Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Omako Basoa (Kortezubi, Bizkaia)</strong><br>Distantzia: 3 km (zirkularra)<br>Zailtasuna: Erraza<br>Ezaugarriak: Agustin Ibarrolak margotutako zuhaitzak dituen baso magikoa. Zure maskotarekin argazkiak ateratzeko ezin hobea.</span><a href="https://www.google.com/maps/search/Bosque+de+Oma+Kortezubi" target="_blank" rel="noopener noreferrer" title="Ikusi Omako Basoa Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionNavarra">Nafarroa</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Irati Basoa (Ori)</strong><br>Ibilbidea: Cubo Ur-jauziaren Bidezidorra<br>Distantzia: 5 km (zirkularra)<br>Zailtasuna: Erraza<br>Ezaugarriak: Espainiako baso ederrenetako bat, pagadi eta ibaiekin. Txakur aktiboentzako aproposa.</span><a href="https://www.google.com/maps/search/Selva+de+Irati+Cascada+del+Cubo" target="_blank" rel="noopener noreferrer" title="Ikusi Irati Basoa Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Arbaiungo Arroila</strong><br>Ibilbidea: Isoko Begiratokia<br>Distantzia: 2 km (joan-etorria)<br>Zailtasuna: Erraza<br>Ezaugarriak: Arroila ikusgarria, gainetik hegan egiten duten saiekin. Bistekin argazkiak ateratzeko aproposa.</span><a href="https://www.google.com/maps/search/Mirador+de+Iso+Foz+de+Arbaiun" target="_blank" rel="noopener noreferrer" title="Ikusi Arbaiungo Arroila Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Bardeak</strong><br>Ibilbidea: Castildetierrako Paseoa<br>Distantzia: 4 km (zirkularra)<br>Zailtasuna: Erraza<br>Ezaugarriak: Paisaia desertiko bakarra. Eraman ura zure txakurrarentzat, itzalik ez baitago.</span><a href="https://www.google.com/maps/search/Castildetierra+Bardenas+Reales" target="_blank" rel="noopener noreferrer" title="Ikusi Bardeak Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Argako Ibai Parkea (Iruñea)</strong><br>Distantzia: 11 km (lineala)<br>Zailtasuna: Erraza<br>Ezaugarriak: Ibaiaren ondoko paseoa, atseden-gune eta iturriekin.</span><a href="https://www.google.com/maps/search/Parque+Fluvial+del+Arga+Pamplona" target="_blank" rel="noopener noreferrer" title="Ikusi Argako Ibai Parkea Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionCantabria">Kantabria</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Oyambreko Parke Naturala (San Vicente de la Barquera)</strong><br>Ibilbidea: Merón eta Oyambre hondartzetan zeharreko paseoa<br>Distantzia: 6 km (zirkularra)<br>Zailtasuna: Erraza<br>Ezaugarriak: Maskotentzako hondartzak eta dunak. Itsasoa maite duten txakurrentzat aproposa.</span><a href="https://www.google.com/maps/search/Parque+Natural+de+Oyambre" target="_blank" rel="noopener noreferrer" title="Ikusi Oyambreko Parke Naturala Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Asón Ibaia (Pasiego Haranak)</strong><br>Ibilbidea: Asóngo Ur-jauzia<br>Distantzia: 4 km (joan-etorria)<br>Zailtasuna: Ertaina<br>Ezaugarriak: Ur-jauzi ikusgarria eta baso hostotsuak.</span><a href="https://www.google.com/maps/search/Cascada+del+Asón" target="_blank" rel="noopener noreferrer" title="Ikusi Asóngo Ur-jauzia Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Dobra Mendia (Torrelavega)</strong><br>Distantzia: 6 km (zirkularra)<br>Zailtasuna: Ertaina<br>Ezaugarriak: Kantabriako bista panoramikoak. Energia duten txakurrentzat aproposa.</span><a href="https://www.google.com/maps/search/Monte+Dobra+Torrelavega" target="_blank" rel="noopener noreferrer" title="Ikusi Dobra Mendia Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Berellíngo Hondartza (Liencres)</strong><br>Mota: Maskotentzako hondartza urte osoan<br>Ezaugarriak: Urrezko harea eta jende gutxi, txakur jostalarientzat ezin hobea.</span><a href="https://www.google.com/maps/search/Playa+de+Berellín+Liencres" target="_blank" rel="noopener noreferrer" title="Ikusi Berellíngo Hondartza Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+            `,
+            tituloConsejosPerros: "📌 Txakurrekin bidaiatzeko aholkuak",
+            listaConsejosPerros: `
+                <li>✅ Uhala nahitaezkoa da babestutako naturguneetan.</li>
+                <li>✅ Eraman ura eta ontzi tolesgarria.</li>
+                <li>✅ Errespetatu hondartzetako araudia (ordutegiak eta baimendutako guneak).</li>
+                <li>✅ Saihestu udako bero handieneko orduak.</li>
+                <li>✅ Bilatu maskotentzako ostatuak (landetxe eta landa-hotel askok onartzen dituzte).</li>
+            `,
+            regionPV: "Euskal Herria",
+            regionNavarra: "Nafarroa",
+            regionCantabria: "Kantabria"
+        },
+        en: {
+            navHome: "Home",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            navRepos: "My Repositories ▼",
+            mainTitlePerros: "Routes to visit with dogs",
+            introPerros: "Routes to visit with dogs in the Basque Country, Navarre and Cantabria",
+            descPerros1: "If you travel with your pet, these regions of northern Spain offer incredible landscapes, well-marked trails, and pet-friendly spaces. Here are some of the best routes and destinations to enjoy with your dog in the Basque Country, Navarre, and Cantabria.",
+            listaRegionesPerros: `
+                <li>
+                    <strong data-key="regionPV">Basque Country</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Monte Urgull (San Sebastián)</strong><br>Distance: 3 km (circular)<br>Difficulty: Easy<br>Features: Walk through an urban park with sea and city views. Ideal for a short and panoramic tour.</span><a href="https://www.google.com/maps/search/Monte+Urgull+San+Sebastián" target="_blank" rel="noopener noreferrer" title="View Monte Urgull on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Gorbeia Natural Park (Álava/Bizkaia)</strong><br>Route: Ascent to Mount Gorbeia (1,482 m)<br>Distance: 12 km (round trip)<br>Difficulty: Medium<br>Features: Lush forests and green landscapes. There are water areas for the dog to cool off.</span><a href="https://www.google.com/maps/search/Parque+Natural+Gorbeia+acceso" target="_blank" rel="noopener noreferrer" title="View Gorbeia on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Laida Beach (Urdaibai, Bizkaia)</strong><br>Type: Pet-friendly beach (off-peak season)<br>Features: Fine sand and gentle waves. Ideal for running and playing with your dog.</span><a href="https://www.google.com/maps/search/Playa+de+Laida+Urdaibai" target="_blank" rel="noopener noreferrer" title="View Laida Beach on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Oma Forest (Kortezubi, Bizkaia)</strong><br>Distance: 3 km (circular)<br>Difficulty: Easy<br>Features: A magical forest with trees painted by Agustín Ibarrola. Perfect for photos with your pet.</span><a href="https://www.google.com/maps/search/Bosque+de+Oma+Kortezubi" target="_blank" rel="noopener noreferrer" title="View Oma Forest on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionNavarra">Navarre</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Irati Forest (Ori)</strong><br>Route: Cubo Waterfall Trail<br>Distance: 5 km (circular)<br>Difficulty: Easy<br>Features: One of the most beautiful forests in Spain, with beech forests and rivers. Ideal for active dogs.</span><a href="https://www.google.com/maps/search/Selva+de+Irati+Cascada+del+Cubo" target="_blank" rel="noopener noreferrer" title="View Irati Forest on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Arbaiun Gorge</strong><br>Route: Iso Viewpoint<br>Distance: 2 km (round trip)<br>Difficulty: Easy<br>Features: Spectacular canyon with vultures flying overhead. Ideal for photos with views.</span><a href="https://www.google.com/maps/search/Mirador+de+Iso+Foz+de+Arbaiun" target="_blank" rel="noopener noreferrer" title="View Arbaiun Gorge on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Bardenas Reales</strong><br>Route: Walk through Castildetierra<br>Distance: 4 km (circular)<br>Difficulty: Easy<br>Features: Unique desert landscape. Bring water for your dog, as there is no shade.</span><a href="https://www.google.com/maps/search/Castildetierra+Bardenas+Reales" target="_blank" rel="noopener noreferrer" title="View Bardenas Reales on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#e30613;">🔹</span> <strong>Arga River Park (Pamplona)</strong><br>Distance: 11 km (linear)<br>Difficulty: Easy<br>Features: Walk along the river, with rest areas and fountains.</span><a href="https://www.google.com/maps/search/Parque+Fluvial+del+Arga+Pamplona" target="_blank" rel="noopener noreferrer" title="View Arga River Park on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong data-key="regionCantabria">Cantabria</strong>
+                    <ul>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Oyambre Natural Park (San Vicente de la Barquera)</strong><br>Route: Walk along Merón and Oyambre beaches<br>Distance: 6 km (circular)<br>Difficulty: Easy<br>Features: Pet-friendly beaches and dunes. Ideal for dogs that love the sea.</span><a href="https://www.google.com/maps/search/Parque+Natural+de+Oyambre" target="_blank" rel="noopener noreferrer" title="View Oyambre Natural Park on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Asón River (Valles Pasiegos)</strong><br>Route: Asón Waterfall<br>Distance: 4 km (round trip)<br>Difficulty: Medium<br>Features: Impressive waterfall and lush forests.</span><a href="https://www.google.com/maps/search/Cascada+del+Asón" target="_blank" rel="noopener noreferrer" title="View Asón Waterfall on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Monte Dobra (Torrelavega)</strong><br>Distance: 6 km (circular)<br>Difficulty: Medium<br>Features: Panoramic views of Cantabria. Ideal for energetic dogs.</span><a href="https://www.google.com/maps/search/Monte+Dobra+Torrelavega" target="_blank" rel="noopener noreferrer" title="View Monte Dobra on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                        <li><span class="activity-text"><span style="color:#009b3a;">🔹</span> <strong>Berellín Beach (Liencres)</strong><br>Type: Pet-friendly beach all year round<br>Features: Golden sand and uncrowded, perfect for playful dogs.</span><a href="https://www.google.com/maps/search/Playa+de+Berellín+Liencres" target="_blank" rel="noopener noreferrer" title="View Berellín Beach on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a></li>
+                    </ul>
+                </li>
+            `,
+            tituloConsejosPerros: "📌 Tips for traveling with dogs",
+            listaConsejosPerros: `
+                <li>✅ Leash mandatory in protected natural areas.</li>
+                <li>✅ Bring water and a collapsible bowl.</li>
+                <li>✅ Respect beach regulations (schedules and permitted areas).</li>
+                <li>✅ Avoid very hot hours in summer.</li>
+                <li>✅ Look for pet-friendly accommodations (many farmhouses and rural hotels accept them).</li>
+            `,
+            regionPV: "Basque Country",
+            regionNavarra: "Navarre",
+            regionCantabria: "Cantabria"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitlePerros;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                if (el.tagName === 'UL' || el.tagName === 'OL' || el.tagName === 'P' || el.tagName === 'H1' || el.tagName === 'H3' || el.tagName === 'BUTTON' || el.tagName === 'STRONG') {
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Set initial language
+    setLanguage('es'); 
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkmode');
+        if(document.body.classList.contains('darkmode')) {
+            toggle.textContent = '☀️';
+        } else {
+            toggle.textContent = '🌙';
+        }
+    });
+    </script>
+
+    <!-- Botón de donación PayPal fijo abajo a la derecha -->
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS',
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+perutas-pais-vasco/
+├── index.html          (Página principal)
+├── css/
+│   └── style.css       (Estilos CSS)
+├── js/
+│   └── main.js        (JavaScript si lo necesitas)
+├── img/               (Imágenes del proyecto)
+├── rutas/             (Subpáginas para cada categoría)
+│   ├── pareja.html
+│   ├── perros.html
+│   ├── niños.html
+│   ├── escalada.html
+│   ├── skate.html
+│   └── gastronomia.html
+└── README.md          (Documentación del proyecto)

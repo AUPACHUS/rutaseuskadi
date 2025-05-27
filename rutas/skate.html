@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skateparks del País Vasco - Rutas País Vasco</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos específicos de skate.html que mantenemos */
+        .skatepark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .skatepark-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .darkmode .skatepark-card { /* Adaptación para modo oscuro */
+            background: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .skatepark-card:hover {
+            transform: translateY(-5px);
+        }
+        .skatepark-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .skatepark-info {
+            padding: 15px;
+            text-align: center;
+        }
+        .skatepark-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e74c3c; /* Color original, se mantiene */
+        }
+        .darkmode .skatepark-name { /* Adaptación para modo oscuro */
+            color: #ff7f50; /* Un color coral más brillante para destacar en oscuro */
+        }
+        .location-btn { /* Este es el botón "Ver ubicación" */
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .location-btn:hover {
+            background: #2980b9;
+        }
+        .darkmode .location-btn {
+            background: #5dade2;
+        }
+        .darkmode .location-btn:hover {
+            background: #76c7c0;
+        }
+
+        @media (max-width: 768px) {
+            .skatepark-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="darkmode"> <!-- Modo oscuro por defecto -->
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava"><img src="../img/mapa_alava.png" alt="Álava" /><span>Álava</span></a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia"><img src="../img/mapa_bizkaia.png" alt="Bizkaia" /><span>Bizkaia</span></a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa"><img src="../img/mapa_gipuzkoa.png" alt="Gipuzkoa" /><span>Gipuzkoa</span></a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra"><img src="../img/mapa_navarra.png" alt="Navarra" /><span>Navarra</span></a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria"><img src="../img/mapa_cantabria.png" alt="Cantabria" /><span>Cantabria</span></a>
+    </aside>
+
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='../index.html'" data-key="navHome">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="pareja.html" data-key="navPareja">En pareja</a></li>
+                <li><a href="perros.html" data-key="navPerros">Con perros</a></li>
+                <li><a href="niños.html" data-key="navNinos">Con niños</a></li>
+                <li><a href="escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="skate.html" class="active" data-key="navSkate">Skate</a></li>
+                <li><a href="gastronomia.html" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button>
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/Rutas-Pais-Vasco" target="_blank" rel="noopener noreferrer">Rutas País Vasco (Este Proyecto)</a>
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">Mi Perfil Principal</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">Mi Web Personal (web2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="window.location.href='mailto:tartemugiocursojava@gmail.com'" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title" data-key="mainTitleSkate">Skateparks del País Vasco</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+        </div>
+    </header>
+
+    <main>
+        <p data-key="introSkate" style="text-align: center; margin-bottom: 2rem; font-size: 1.1em;">
+            ¡Explora los mejores skateparks del País Vasco y alrededores! Encuentra tu próximo spot para patinar.
+        </p>
+
+        <div class="skatepark-grid">
+            <div class="skatepark-card">
+                <img src="../img/skateparkdeaiete_bowl.png" alt="Skatepark de Aiete_bowl" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkAieteName">Skatepark de Aiete_bowl (San Sebastián)</div>
+                    <a href="https://www.google.com/maps/place/Skatepark+de+Aiete+(bowl)/@43.2983919,-1.9928411,17z/data=!3m1!4b1!4m6!3m5!1s0xd51b01c08934105:0x8be9fe6e394891f2!8m2!3d43.2983919!4d-1.9928411!16s%2Fg%2F11bw4v22f6?hl=es&entry=ttu&g_ep=EgoyMDI1MDUxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/pumptruck zorrotza.png" alt="Pumptrack Zorrotza" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkZorrotzaName">Pumptrack Zorrotza (Bilbao)</div>
+                    <a href="https://www.google.com/maps/place/Pumptrack+Zorrotza/@43.2597629,-2.9657087,17z/data=!3m1!4b1!4m6!3m5!1s0xd4e505f00000001:0x9a31a7f9b7029128!8m2!3d43.2597629!4d-2.9631338!16s%2Fg%2F11h1y1j6j9?entry=ttu" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skateparksantalucia.png" alt="Skate Santa Lucía" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkSantaLuciaName">Skate Santa Lucía (Vitoria-Gasteiz)</div>
+                    <a href="https://www.google.com/maps/place/Skate+Santa+Luc%C3%ADa/@42.844376,-2.6587544,17z/data=!3m1!4b1!4m6!3m5!1s0xd4fc2629d9d7af3:0x81d6b25bc22c67df!8m2!3d42.844376!4d-2.6587544!16s%2Fg%2F11bw47fj_2?hl=es&entry=ttu&g_ep=EgoyMDI1MDUxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skateparklasesarre.png" alt="Skatepark Lasesarre" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkLasesarreName">Skatepark Lasesarre (Barakaldo)</div>
+                    <a href="https://www.google.com/maps/place/Lasesarre+Skatepark/@43.3034344,-2.9836638,17z/data=!3m1!4b1!4m6!3m5!1s0xd4e5a64688f8b9f:0x746325c576ea6741!8m2!3d43.3034344!4d-2.9836638!16s%2Fg%2F11fxrxtlt1?hl=es&entry=ttu&g_ep=EgoyMDI1MDUxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/pumptruckirun.png" alt="Pumptruck Irun" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkIrunName">Pumptrack Irun</div>
+                    <a href="https://www.google.com/maps/place/PumpTrack+Irun/@43.3307684,-1.8138096,17z/data=!3m1!4b1!4m6!3m5!1s0xd5109ccf4de9311:0x71621fb10b99a432!8m2!3d43.3307684!4d-1.8138096!16s%2Fg%2F11sstp0hj1?hl=es&entry=ttu&g_ep=EgoyMDI1MDUxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/sautxi skatepark eibar.png" alt="Sautxi Skatepark Eibar" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkEibarName">Sautxi Skatepark Eibar</div>
+                    <a href="https://www.google.com/maps/place/Sautsi+Skatepark/@43.1820199,-2.4700117,17z/data=!3m1!4b1!4m6!3m5!1s0xd501d0000000001:0x942a67153070147c!8m2!3d43.1820199!4d-2.4674368!16s%2Fg%2F11rxkrjtq6?entry=ttu" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <!-- Nuevos Skateparks -->
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo1.jpg" alt="Skatepark Nuevo 1" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo1Name">Skatepark Leioa (Bizkaia)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Leioa" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo2.jpg" alt="Skatepark Nuevo 2" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo2Name">Skatepark Durango (Bizkaia)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Durango" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo3.jpg" alt="Skatepark Nuevo 3" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo3Name">Skatepark Zarautz (Gipuzkoa)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Zarautz" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo4.jpg" alt="Skatepark Nuevo 4" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo4Name">Skatepark Pamplona (Navarra)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Pamplona" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo5.jpg" alt="Skatepark Nuevo 5" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo5Name">Skatepark Getxo La Kantera (Bizkaia)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Getxo+La+Kantera" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+
+            <div class="skatepark-card">
+                <img src="../img/skatepark_nuevo6.jpg" alt="Skatepark Nuevo 6" class="skatepark-img">
+                <div class="skatepark-info">
+                    <div class="skatepark-name" data-key="skateparkNuevo6Name">Skatepark Hondarribia (Gipuzkoa)</div>
+                    <a href="https://maps.google.com/?q=Skatepark+Hondarribia" target="_blank" class="location-btn" data-key="verUbicacionBtn">Ver ubicación</a>
+                </div>
+            </div>
+            <!-- Fin Nuevos Skateparks -->
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2022 - Rutas País Vasco-AUPACHUS</p>
+    </footer>
+
+    <script src="../js/background.js" defer></script>
+    <script src="../js/dropdown.js" defer></script>
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            navHome: "Inicio",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            navRepos: "Mis Repositorios ▼",
+            mainTitleSkate: "Skateparks del País Vasco",
+            introSkate: "¡Explora los mejores skateparks del País Vasco y alrededores! Encuentra tu próximo spot para patinar.",
+            skateparkAieteName: "Skatepark de Aiete_bowl (San Sebastián)",
+            skateparkZorrotzaName: "Pumptrack Zorrotza (Bilbao)",
+            skateparkSantaLuciaName: "Skate Santa Lucía (Vitoria-Gasteiz)",
+            skateparkLasesarreName: "Skatepark Lasesarre (Barakaldo)",
+            skateparkIrunName: "Pumptrack Irun",
+            skateparkEibarName: "Sautxi Skatepark Eibar",
+            skateparkNuevo1Name: "Skatepark Leioa (Bizkaia)",
+            skateparkNuevo2Name: "Skatepark Durango (Bizkaia)",
+            skateparkNuevo3Name: "Skatepark Zarautz (Gipuzkoa)",
+            skateparkNuevo4Name: "Skatepark Pamplona (Navarra)",
+            skateparkNuevo5Name: "Skatepark Getxo La Kantera (Bizkaia)",
+            skateparkNuevo6Name: "Skatepark Hondarribia (Gipuzkoa)",
+            verUbicacionBtn: "Ver ubicación"
+        },
+        eu: {
+            navHome: "Hasiera",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            navRepos: "Nire Biltegiak ▼",
+            mainTitleSkate: "Euskal Herriko Skateparkak",
+            introSkate: "Arakatu Euskal Herriko eta inguruko skatepark onenak! Aurkitu patinatzeko zure hurrengo lekua.",
+            skateparkAieteName: "Aieteko Skateparka_bowl (Donostia)",
+            skateparkZorrotzaName: "Zorrotzako Pumptracka (Bilbo)",
+            skateparkSantaLuciaName: "Santa Luziako Skateparka (Gasteiz)",
+            skateparkLasesarreName: "Lasesarreko Skateparka (Barakaldo)",
+            skateparkIrunName: "Irungo Pumptracka",
+            skateparkEibarName: "Sautxi Skateparka Eibar",
+            skateparkNuevo1Name: "Leioako Skateparka (Bizkaia)",
+            skateparkNuevo2Name: "Durangoko Skateparka (Bizkaia)",
+            skateparkNuevo3Name: "Zarauzko Skateparka (Gipuzkoa)",
+            skateparkNuevo4Name: "Iruñeko Skateparka (Nafarroa)",
+            skateparkNuevo5Name: "Getxoko La Kantera Skateparka (Bizkaia)",
+            skateparkNuevo6Name: "Hondarribiko Skateparka (Gipuzkoa)",
+            verUbicacionBtn: "Ikusi kokapena"
+        },
+        en: {
+            navHome: "Home",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            navRepos: "My Repositories ▼",
+            mainTitleSkate: "Skateparks in the Basque Country",
+            introSkate: "Explore the best skateparks in the Basque Country and surroundings! Find your next spot to skate.",
+            skateparkAieteName: "Aiete_bowl Skatepark (San Sebastián)",
+            skateparkZorrotzaName: "Zorrotza Pumptrack (Bilbao)",
+            skateparkSantaLuciaName: "Skate Santa Lucía (Vitoria-Gasteiz)",
+            skateparkLasesarreName: "Lasesarre Skatepark (Barakaldo)",
+            skateparkIrunName: "Irun Pumptrack",
+            skateparkEibarName: "Sautxi Skatepark Eibar",
+            skateparkNuevo1Name: "Leioa Skatepark (Biscay)",
+            skateparkNuevo2Name: "Durango Skatepark (Biscay)",
+            skateparkNuevo3Name: "Zarautz Skatepark (Gipuzkoa)",
+            skateparkNuevo4Name: "Pamplona Skatepark (Navarre)",
+            skateparkNuevo5Name: "Getxo La Kantera Skatepark (Biscay)",
+            skateparkNuevo6Name: "Hondarribia Skatepark (Gipuzkoa)",
+            verUbicacionBtn: "View location"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitleSkate;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                if (el.tagName === 'P' || el.tagName === 'BUTTON' || el.tagName === 'DIV' || el.tagName === 'A' || el.tagName === 'SPAN') { // DIV para .skatepark-name
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('darkmode');
+            toggle.textContent = document.body.classList.contains('darkmode') ? '☀️' : '🌙';
+        });
+    }
+
+    // Set initial language
+    setLanguage('es');
+    </script>
+
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS',
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>

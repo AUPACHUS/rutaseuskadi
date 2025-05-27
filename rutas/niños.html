@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas con Niños - Rutas País Vasco</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<style>
+    .senderismo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Cuadrícula responsive */
+        gap: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .ruta-senderismo-card {
+        background-color: #fff; /* Color de fondo claro por defecto */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Alinea el botón abajo si las alturas varían */
+    }
+
+    .darkmode .ruta-senderismo-card {
+        background-color: #3a3a3a; /* Un poco más claro que el fondo oscuro general */
+        border-color: #555;
+    }
+
+    .ruta-senderismo-card h3 {
+        color: #e74c3c; /* Color primario para títulos */
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+
+    /* Estilos para la lista de actividades destacadas y sus botones de mapa */
+    .cuadro-historia ul[data-key="listaNinosLugares"] li {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start; /* Mejor para texto que puede envolver */
+        margin-bottom: 0.8em;
+        padding-bottom: 0.5em;
+        border-bottom: 1px dashed #ccc;
+    }
+    .darkmode .cuadro-historia ul[data-key="listaNinosLugares"] li {
+        border-bottom-color: #555;
+    }
+    .cuadro-historia ul[data-key="listaNinosLugares"] li:last-child {
+        border-bottom: none; /* No border for the last item */
+    }
+
+    .cuadro-historia ul li .activity-text {
+        flex-grow: 1;
+        margin-right: 10px; /* Espacio entre el texto y el botón */
+    }
+
+    .map-link-btn-inline {
+        padding: 0.4em 0.7em; /* Un poco más de padding */
+        font-size: 1em; /* Tamaño de fuente del botón */
+        margin-left: auto; /* Empuja el botón a la derecha */
+    }
+</style>
+<body class="darkmode">
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava"><img src="../img/mapa_alava.png" alt="Álava" /><span>Álava</span></a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia"><img src="../img/mapa_bizkaia.png" alt="Bizkaia" /><span>Bizkaia</span></a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa"><img src="../img/mapa_gipuzkoa.png" alt="Gipuzkoa" /><span>Gipuzkoa</span></a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra"><img src="../img/mapa_navarra.png" alt="Navarra" /><span>Navarra</span></a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria"><img src="../img/mapa_cantabria.png" alt="Cantabria" /><span>Cantabria</span></a>
+    </aside>
+
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='../index.html'" data-key="navHome">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="pareja.html" data-key="navPareja">En pareja</a></li>
+                <li><a href="perros.html" data-key="navPerros">Con perros</a></li>
+                <li><a href="niños.html" class="active" data-key="navNinos">Con niños</a></li>
+                <li><a href="escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="skate.html" data-key="navSkate">Skate</a></li>
+                <li><a href="gastronomia.html" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button>
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/Rutas-Pais-Vasco" target="_blank" rel="noopener noreferrer">Rutas País Vasco (Este Proyecto)</a>
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">Mi Perfil Principal</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">Mi Web Personal (web2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="window.location.href='mailto:tartemugiocursojava@gmail.com'" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title" data-key="mainTitleNinos">Rutas y Actividades con Niños</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+            <!-- Puedes añadir más idiomas si es necesario, como en index.html -->
+        </div>
+    </header>
+
+    <main>
+        <p data-key="introNinos">El País Vasco, Navarra y Cantabria ofrecen un montón de planes divertidos para disfrutar en familia. ¡Descubre lugares mágicos y actividades inolvidables para los más pequeños!</p>
+
+        <div class="cuadro-historia">
+            <h2 data-key="subtituloNinosLugares">Lugares y Actividades Destacadas</h2>
+            <ul data-key="listaNinosLugares">
+                <!-- El contenido de esta lista se generará mediante JavaScript y las traducciones -->
+                <!-- Ejemplo de cómo se verá un elemento (no poner directamente aquí):
+                <li>
+                    <span class="activity-text"><strong>Aquarium de San Sebastián (Gipuzkoa):</strong> Un clásico que nunca falla...</span>
+                    <a href="URL_MAPA" target="_blank" rel="noopener noreferrer" title="Ver en mapa"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li> -->
+            </ul>
+        </div>
+
+        <div class="cuadro-historia">
+            <h2 data-key="subtituloNinosSenderismo">Rutas de Senderismo Fáciles para Niños</h2>
+            <p data-key="descNinosSenderismo">Explora la naturaleza con estas sencillas rutas, perfectas para iniciar a los más pequeños en el senderismo y disfrutar de paisajes increíbles en familia.</p>
+            <div class="senderismo-gallery">
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo1">Anillo Verde de Vitoria</h3>
+                    <a href="https://www.google.com/maps/search/Anillo+Verde+Vitoria-Gasteiz" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo2">Flysch de Zumaia (Tramo Familiar)</h3>
+                    <a href="https://www.google.com/maps/search/Ruta+Flysch+Zumaia+Itzurun" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo3">Vía Verde de Arditurri</h3>
+                    <a href="https://www.google.com/maps/search/V%C3%ADa+Verde+Arditurri+Oiartzun" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo4">Paseo Bosque de Oma</h3>
+                    <a href="https://www.google.com/maps/search/Bosque+de+Oma+Kortezubi+aparcamiento" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo5">Ruta Faro de la Plata</h3>
+                    <a href="https://www.google.com/maps/search/Ruta+Faro+de+la+Plata+Pasaia" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo6">Marismas de Urdaibai (Bird Center)</h3>
+                    <a href="https://www.google.com/maps/place/Urdaibai+Bird+Center/@43.3299677,-2.681563,17z" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo7">Vía Verde Plazaola (Andoain)</h3>
+                    <a href="https://www.google.com/maps/search/V%C3%ADa+Verde+Plazaola+Andoain+inicio" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+                <div class="ruta-senderismo-card">
+                    <h3 data-key="rutaSenderismoTitulo8">Gorbeia: Zona Pagomakurre</h3>
+                    <a href="https://www.google.com/maps/place/Aparcamiento+de+Pagomakurre" target="_blank" rel="noopener noreferrer"><button class="home-btn" data-key="verEnMapaBtn">Ver en Google Maps</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="cuadro-historia">
+            <h2 data-key="subtituloNinosConsejos">Consejos para Viajar con Niños</h2>
+            <ul data-key="listaNinosConsejos">
+                <li><strong>Planifica con antelación pero sé flexible:</strong> Tener una idea de las actividades es bueno, pero con niños los planes pueden cambiar.</li>
+                <li><strong>Busca alojamientos "family-friendly":</strong> Hoteles o apartamentos con facilidades para niños pueden hacer la estancia más cómoda.</li>
+                <li><strong>Lleva snacks y agua:</strong> Imprescindible para evitar crisis de hambre o sed inesperadas.</li>
+                <li><strong>Involúcralos en la planificación:</strong> Pregúntales qué les gustaría hacer o ver.</li>
+                <li><strong>No olvides el protector solar y gorras:</strong> Incluso en el norte, el sol puede ser fuerte.</li>
+                <li><strong>Consulta horarios y entradas online:</strong> Ahorrarás tiempo y posibles colas.</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2022 - Rutas País Vasco-AUPACHUS</p>
+    </footer>
+
+    <script src="../js/background.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            navHome: "Inicio",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            navRepos: "Mis Repositorios ▼",
+            mainTitleNinos: "Rutas y Actividades con Niños",
+            introNinos: "El País Vasco, Navarra y Cantabria ofrecen un montón de planes divertidos para disfrutar en familia. ¡Descubre lugares mágicos y actividades inolvidables para los más pequeños!",
+            subtituloNinosLugares: "Lugares y Actividades Destacadas",
+            listaNinosLugares: `
+                <li>
+                    <span class="activity-text"><strong>Aquarium de San Sebastián (Gipuzkoa):</strong> Un clásico que nunca falla. Los túneles de tiburones y la variedad de especies marinas fascinarán a niños y adultos.</span>
+                    <a href="https://www.google.com/maps/search/Aquarium+San+Sebastián" target="_blank" rel="noopener noreferrer" title="Ver Aquarium en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Museo Guggenheim Bilbao con talleres infantiles (Bizkaia):</strong> Muchos museos ofrecen actividades especiales para niños. El Guggenheim es impresionante por fuera y por dentro, y sus talleres son una gran opción.</span>
+                    <a href="https://www.google.com/maps/search/Museo+Guggenheim+Bilbao" target="_blank" rel="noopener noreferrer" title="Ver Guggenheim en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Parque de la Naturaleza de Cabárceno (Cantabria):</strong> Un lugar espectacular donde los animales viven en semilibertad en un entorno natural impresionante.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+la+Naturaleza+de+Cabárceno" target="_blank" rel="noopener noreferrer" title="Ver Cabárceno en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Sendaviva (Navarra):</strong> Parque de aventura y diversión con animales, atracciones y espectáculos.</span>
+                    <a href="https://www.google.com/maps/search/Sendaviva+Arguedas" target="_blank" rel="noopener noreferrer" title="Ver Sendaviva en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Cuevas de Pozalagua (Bizkaia):</strong> Un viaje al interior de la tierra para descubrir estalactitas excéntricas únicas en el mundo.</span>
+                    <a href="https://www.google.com/maps/search/Cuevas+de+Pozalagua+Karrantza" target="_blank" rel="noopener noreferrer" title="Ver Cuevas de Pozalagua en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Parque de Atracciones Monte Igueldo (San Sebastián, Gipuzkoa):</strong> Además de unas vistas espectaculares de la bahía, cuenta con un parque de atracciones con encanto vintage.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+Atracciones+Monte+Igueldo" target="_blank" rel="noopener noreferrer" title="Ver Monte Igueldo en Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+            `,
+            subtituloNinosSenderismo: "Rutas de Senderismo Fáciles para Niños",
+            descNinosSenderismo: "Explora la naturaleza con estas sencillas rutas, perfectas para iniciar a los más pequeños en el senderismo y disfrutar de paisajes increíbles en familia.",
+            verEnMapaBtn: "Ver en Google Maps",
+            rutaSenderismoTitulo1: "Anillo Verde de Vitoria",
+            rutaSenderismoTitulo2: "Flysch de Zumaia (Tramo Familiar)",
+            rutaSenderismoTitulo3: "Vía Verde de Arditurri",
+            rutaSenderismoTitulo4: "Paseo Bosque de Oma",
+            rutaSenderismoTitulo5: "Ruta Faro de la Plata",
+            rutaSenderismoTitulo6: "Marismas de Urdaibai (Bird Center)",
+            rutaSenderismoTitulo7: "Vía Verde Plazaola (Andoain)",
+            rutaSenderismoTitulo8: "Gorbeia: Zona Pagomakurre",
+            subtituloNinosConsejos: "Consejos para Viajar con Niños",
+            listaNinosConsejos: `
+                <li><strong>Planifica con antelación pero sé flexible:</strong> Tener una idea de las actividades es bueno, pero con niños los planes pueden cambiar.</li>
+                <li><strong>Busca alojamientos "family-friendly":</strong> Hoteles o apartamentos con facilidades para niños pueden hacer la estancia más cómoda.</li>
+                <li><strong>Lleva snacks y agua:</strong> Imprescindible para evitar crisis de hambre o sed inesperadas.</li>
+                <li><strong>Involúcralos en la planificación:</strong> Pregúntales qué les gustaría hacer o ver.</li>
+                <li><strong>No olvides el protector solar y gorras:</strong> Incluso en el norte, el sol puede ser fuerte.</li>
+                <li><strong>Consulta horarios y entradas online:</strong> Ahorrarás tiempo y posibles colas.</li>
+            `
+        },
+        eu: {
+            navHome: "Hasiera",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            navRepos: "Nire Biltegiak ▼",
+            mainTitleNinos: "Ibilbideak eta Jarduerak Haurrekin",
+            introNinos: "Euskal Herriak, Nafarroak eta Kantauriak familian gozatzeko plan dibertigarri ugari eskaintzen dituzte. Ezagutu leku magikoak eta jarduera ahaztezinak txikienentzat!",
+            subtituloNinosLugares: "Leku eta Jarduera Nabarmenak",
+            listaNinosLugares: `
+                <li>
+                    <span class="activity-text"><strong>Donostiako Aquariuma (Gipuzkoa):</strong> Inoiz huts egiten ez duen klasikoa. Marrazoen tunelak eta itsas espezieen aniztasunak haurrak eta helduak liluratuko ditu.</span>
+                    <a href="https://www.google.com/maps/search/Aquarium+San+Sebastián" target="_blank" rel="noopener noreferrer" title="Ikusi Aquarium Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Bilboko Guggenheim Museoa haurrentzako tailerrekin (Bizkaia):</strong> Museo askok haurrentzako jarduera bereziak eskaintzen dituzte. Guggenheim ikusgarria da kanpotik eta barrutik, eta bertako tailerrak aukera bikaina dira.</span>
+                    <a href="https://www.google.com/maps/search/Museo+Guggenheim+Bilbao" target="_blank" rel="noopener noreferrer" title="Ikusi Guggenheim Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Cabarcenoko Natur Parkea (Kantabria):</strong> Animaliak erdi-askatasunean bizi diren leku ikusgarria, ingurune natural paregabean.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+la+Naturaleza+de+Cabárceno" target="_blank" rel="noopener noreferrer" title="Ikusi Cabárceno Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Sendaviva (Nafarroa):</strong> Abentura eta dibertsio parkea, animaliekin, atrakzioekin eta ikuskizunekin.</span>
+                    <a href="https://www.google.com/maps/search/Sendaviva+Arguedas" target="_blank" rel="noopener noreferrer" title="Ikusi Sendaviva Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Pozalaguako Haitzuloak (Bizkaia):</strong> Lurraren barrenetara bidaia, munduan bakarrak diren estalaktita eszentrikoak ezagutzeko.</span>
+                    <a href="https://www.google.com/maps/search/Cuevas+de+Pozalagua+Karrantza" target="_blank" rel="noopener noreferrer" title="Ikusi Pozalaguako Haitzuloak Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Igeldoko Mendiko Jolas Parkea (Donostia, Gipuzkoa):</strong> Badiako ikuspegi zoragarriez gain, xarma handiko jolas-parke bat du.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+Atracciones+Monte+Igueldo" target="_blank" rel="noopener noreferrer" title="Ikusi Igeldoko Mendia Google Maps-en"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+            `,
+            subtituloNinosSenderismo: "Haurrentzako Mendi Ibilbide Errazak",
+            descNinosSenderismo: "Arakatu natura ibilbide erraz hauekin, txikienak mendizaletasunean hasteko eta familian paisaia ikaragarriez gozatzeko ezin hobeak.",
+            verEnMapaBtn: "Ikusi Google Maps-en",
+            rutaSenderismoTitulo1: "Gasteizko Eraztun Berdea",
+            rutaSenderismoTitulo2: "Zumaiako Flyscha (Familientzako Zatia)",
+            rutaSenderismoTitulo3: "Arditurriko Bide Berdea",
+            rutaSenderismoTitulo4: "Omako Basoko Pasealekua",
+            rutaSenderismoTitulo5: "Zilarrezko Itsasargiaren Ibilbidea",
+            rutaSenderismoTitulo6: "Urdaibaiko Padurak (Bird Center)",
+            rutaSenderismoTitulo7: "Plazaolako Bide Berdea (Andoain)",
+            rutaSenderismoTitulo8: "Gorbeia: Pagomakurreko Eremua",
+            subtituloNinosConsejos: "Haurrekin Bidaiatzeko Aholkuak",
+            listaNinosConsejos: `
+                <li><strong>Aldez aurretik planifikatu baina izan malgua:</strong> Jardueren ideia bat izatea ona da, baina haurrekin planak alda daitezke.</li>
+                <li><strong>Bilatu "family-friendly" ostatuak:</strong> Haurrentzako erraztasunak dituzten hotel edo apartamentuek egonaldia erosoagoa egin dezakete.</li>
+                <li><strong>Eraman mokaduak eta ura:</strong> Ezinbestekoa ustekabeko gose edo egarri krisiak saihesteko.</li>
+                <li><strong>Parte harazi itzazu plangintzan:</strong> Galdetu zer egin edo ikusi nahiko luketen.</li>
+                <li><strong>Ez ahaztu eguzkitako krema eta txanoak:</strong> Iparraldean ere, eguzkia indartsua izan daiteke.</li>
+                <li><strong>Kontsultatu ordutegiak eta sarrerak online:</strong> Denbora eta ilara posibleak aurreztuko dituzu.</li>
+            `
+        },
+        en: {
+            navHome: "Home",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            navRepos: "My Repositories ▼",
+            mainTitleNinos: "Routes and Activities with Children",
+            introNinos: "The Basque Country, Navarre, and Cantabria offer plenty of fun plans to enjoy as a family. Discover magical places and unforgettable activities for the little ones!",
+            subtituloNinosLugares: "Featured Places and Activities",
+            listaNinosLugares: `
+                <li>
+                    <span class="activity-text"><strong>San Sebastián Aquarium (Gipuzkoa):</strong> A classic that never fails. The shark tunnels and variety of marine species will fascinate children and adults alike.</span>
+                    <a href="https://www.google.com/maps/search/Aquarium+San+Sebastián" target="_blank" rel="noopener noreferrer" title="View Aquarium on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Guggenheim Museum Bilbao with children's workshops (Bizkaia):</strong> Many museums offer special activities for children. The Guggenheim is impressive inside and out, and its workshops are a great option.</span>
+                    <a href="https://www.google.com/maps/search/Museo+Guggenheim+Bilbao" target="_blank" rel="noopener noreferrer" title="View Guggenheim on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Cabárceno Nature Park (Cantabria):</strong> A spectacular place where animals live in semi-freedom in an impressive natural environment.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+la+Naturaleza+de+Cabárceno" target="_blank" rel="noopener noreferrer" title="View Cabárceno on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Sendaviva (Navarre):</strong> Adventure and amusement park with animals, attractions, and shows.</span>
+                    <a href="https://www.google.com/maps/search/Sendaviva+Arguedas" target="_blank" rel="noopener noreferrer" title="View Sendaviva on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Pozalagua Caves (Bizkaia):</strong> A journey into the earth to discover eccentric stalactites unique in the world.</span>
+                    <a href="https://www.google.com/maps/search/Cuevas+de+Pozalagua+Karrantza" target="_blank" rel="noopener noreferrer" title="View Pozalagua Caves on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+                <li>
+                    <span class="activity-text"><strong>Monte Igueldo Amusement Park (San Sebastián, Gipuzkoa):</strong> In addition to spectacular views of the bay, it has a charming vintage amusement park.</span>
+                    <a href="https://www.google.com/maps/search/Parque+de+Atracciones+Monte+Igueldo" target="_blank" rel="noopener noreferrer" title="View Monte Igueldo on Google Maps"><button class="home-btn map-link-btn-inline">🗺️</button></a>
+                </li>
+            `,
+            subtituloNinosSenderismo: "Easy Hiking Trails for Kids",
+            descNinosSenderismo: "Explore nature with these simple trails, perfect for introducing little ones to hiking and enjoying incredible family landscapes.",
+            verEnMapaBtn: "View on Google Maps",
+            rutaSenderismoTitulo1: "Vitoria's Green Belt",
+            rutaSenderismoTitulo2: "Zumaia Flysch (Family Section)",
+            rutaSenderismoTitulo3: "Arditurri Greenway",
+            rutaSenderismoTitulo4: "Oma Forest Walk",
+            rutaSenderismoTitulo5: "Faro de la Plata Route",
+            rutaSenderismoTitulo6: "Urdaibai Marshes (Bird Center)",
+            rutaSenderismoTitulo7: "Plazaola Greenway (Andoain)",
+            rutaSenderismoTitulo8: "Gorbeia: Pagomakurre Area",
+            subtituloNinosConsejos: "Tips for Traveling with Children",
+            listaNinosConsejos: `
+                <li><strong>Plan ahead but be flexible:</strong> Having an idea of activities is good, but with children, plans can change.</li>
+                <li><strong>Look for family-friendly accommodations:</strong> Hotels or apartments with facilities for children can make your stay more comfortable.</li>
+                <li><strong>Bring snacks and water:</strong> Essential to avoid unexpected hunger or thirst crises.</li>
+                <li><strong>Involve them in planning:</strong> Ask them what they would like to do or see.</li>
+                <li><strong>Don't forget sunscreen and hats:</strong> Even in the north, the sun can be strong.</li>
+                <li><strong>Check schedules and tickets online:</strong> You'll save time and potential queues.</li>
+            `
+        }
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitleNinos;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                // Para elementos que pueden contener HTML (como listas), usamos innerHTML
+                if (el.tagName === 'UL' || el.tagName === 'P' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'BUTTON') {
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkmode');
+        if(document.body.classList.contains('darkmode')) {
+            toggle.textContent = '☀️';
+        } else {
+            toggle.textContent = '🌙';
+        }
+    });
+
+    // Set initial language based on browser or default to 'es'
+    // const userLang = navigator.language.split('-')[0] || 'es';
+    // setLanguage(translations[userLang] ? userLang : 'es');
+    // O simplemente iniciar en español por defecto si no quieres detección de idioma del navegador
+    setLanguage('es');
+
+    </script>
+
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS', // Asegúrate que este ID es correcto
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>

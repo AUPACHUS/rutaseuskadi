@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas por el País Vasco</title>
+    <style>
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Espacio entre imágenes */
+            margin-top: 15px; /* Espacio sobre la galería */
+        }
+        .photo-gallery img {
+            width: calc(25% - 10px); /* Para 4 imágenes en una fila, ajusta según el gap */
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="darkmode">
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+    <!-- Accesos directos a mapas -->
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava">
+            <img src="img/mapa_alava.png" alt="Álava" /><span>Álava</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia">
+            <img src="img/mapa_bizkaia.png" alt="Bizkaia" /><span>Bizkaia</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa">
+            <img src="img/mapa_gipuzkoa.png" alt="Gipuzkoa" /><span>Gipuzkoa</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra">
+            <img src="img/mapa_navarra.png" alt="Navarra" /><span>Navarra</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria">
+            <img src="img/mapa_cantabria.png" alt="Cantabria" /><span>Cantabria</span>
+        </a>
+    </aside>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='index.html'">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="rutas/pareja.html" data-key="navPareja">En pareja</a></li>
+                <li><a href="rutas/perros.html" data-key="navPerros">Con perros</a></li>
+                <li><a href="rutas/niños.html" data-key="navNinos">Con niños</a></li>
+                <li><a href="rutas/escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="rutas/skate.html" data-key="navSkate">Skate</a></li>
+                <li><a href="rutas/gastronomia.html" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="rutas/moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="rutas/camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button> <!-- Aseguramos que usa la clase correcta para el estilo del desplegable -->
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">GITHUB PROFILE</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">(WEB2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="window.location.href='mailto:tartemugiocursojava@gmail.com'" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title">Rutas por el País Vasco</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+            <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+            <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+            <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+            <button class="lang-btn" data-lang="ar" title="العربية">🇸🇦</button>
+            <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+            <button class="lang-btn" data-lang="ja" title="日本語">🇯🇵</button>
+        </div>
+    </header>
+    <main>
+        <p data-key="bienvenida">Bienvenido a la guía de rutas turísticas de Aupachus</p>
+        <P data-key="bienvenida2">Aquí encontrarás una selección de rutas adaptadas a diferentes intereses y necesidades.</P>
+        <P data-key="bienvenida3">Desde paseos tranquilos por la costa hasta emocionantes aventuras en la montaña, tenemos algo para todos.</P>
+        <P data-key="bienvenida4">¡Explora, disfruta y descubre la belleza del País Vasco!</P>
+        <p data-key="bienvenida5">Con este boton a continuacion accedes a OpenStreetMap para trazar tus propias rutas</p>
+                </div>                  
+        <div style="text-align: center; margin: 1em 0;">
+            <a href="https://www.openstreetmap.org/#map=6/40.01/-2.49" target="_blank" rel="noopener noreferrer">
+                <button class="home-btn" data-key="osmLink">Explorar en OpenStreetMap</button>
+            </a>
+        </div>
+        <p data-key="explora">Explora la belleza natural y cultural de esta región a través de nuestras rutas seleccionadas.</p>
+        <p data-key="busca">Ya sea que busques aventuras al aire libre, gastronomía local o actividades para toda la familia, aquí encontrarás lo que necesitas.</p>
+        <p data-key="hazclic">Haz clic en los enlaces a los mapas en la parte izquierda para poder buscar rutas acotadas a ese territorio.</p>
+        <p data-key="disfruta">¡Disfruta de tu viaje!</p>
+        <p data-key="contacta">Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.</p>
+        
+
+        <div class="cuadro-historia">
+            <h2 data-key="historiaEuskadiTitulo">Euskadi: Tierra de Historia y Cultura</h2>
+            <p data-key="historiaEuskadi">
+                El País Vasco (<strong>Euskadi</strong> en euskera) es una comunidad autónoma con una identidad única, lengua propia y una historia milenaria. Sus paisajes verdes y su cultura ancestral la convierten en un destino especial en Europa.
+            </p>
+            <div class="photo-gallery">
+                <img src="img/euskadi_foto1.jpg" alt="Paisaje de Euskadi 1">
+                <img src="img/euskadi_foto2.jpg" alt="Cultura Vasca 1">
+                <img src="img/euskadi_foto3.jpg" alt="Costa Vasca">
+                <img src="img/euskadi_foto4.jpg" alt="Interior de Euskadi">
+            </div>
+        </div>
+        <div class="cuadro-historia">
+            <h2 data-key="historiaBizkaiaTitulo">Bizkaia: Corazón Industrial y Marítimo</h2>
+            <p data-key="historiaBizkaia">
+                <strong>Bizkaia</strong> es conocida por su tradición marinera, su industria y su capital, Bilbao. El Puente Colgante de Portugalete y el Museo Guggenheim son símbolos de su modernidad y su historia.
+            </p>
+            <div class="photo-gallery">
+                <img src="img/bizkaia_foto1.jpg" alt="Bilbao y el Guggenheim">
+                <img src="img/bizkaia_foto2.jpg" alt="Puente Colgante de Portugalete">
+                <img src="img/bizkaia_foto3.jpg" alt="Costa de Bizkaia">
+                <img src="img/bizkaia_foto4.jpg" alt="San Juan de Gaztelugatxe">
+            </div>
+        </div>
+        <div class="cuadro-historia">
+            <h2 data-key="historiaGetxoTitulo">Getxo: Belleza Costera y Patrimonio</h2>
+            <p data-key="historiaGetxo">
+                <strong>Getxo</strong> destaca por sus playas, acantilados y barrios históricos como Algorta. Es un lugar ideal para pasear junto al mar y descubrir la arquitectura señorial de sus palacetes.
+            </p>
+            <div class="photo-gallery">
+                <img src="img/getxo_foto1.jpg" alt="Playa de Getxo">
+                <img src="img/getxo_foto2.jpg" alt="Puerto Viejo de Algorta">
+                <img src="img/getxo_foto3.jpg" alt="Acantilados de La Galea">
+                <img src="img/getxo_foto4.jpg" alt="Palacetes de Getxo">
+            </div>
+        </div>
+        <div class="cuadro-historia">
+            <h2 data-key="historiaArtazaTitulo">Palacio Artaza: Elegancia en Leioa</h2>
+            <p data-key="historiaArtaza">
+                El <strong>Palacio Artaza</strong>, construido a principios del siglo XX, es uno de los edificios más emblemáticos de Leioa y Bizkaia. Rodeado de jardines, fue residencia de la nobleza y hoy es un espacio para eventos y cultura.
+            </p>
+            <div class="photo-gallery">
+                <img src="img/artaza_foto1.jpg" alt="Palacio Artaza Exterior">
+                <img src="img/artaza_foto2.jpg" alt="Jardines del Palacio Artaza">
+                <img src="img/artaza_foto3.jpg" alt="Detalle arquitectónico Palacio Artaza">
+                <img src="img/artaza_foto4.jpg" alt="Vista del Palacio Artaza">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2022 - Rutas País Vasco-AUPACHUS</p>
+    </footer>
+    <script src="js/background.js"></script>
+    <script src="js/dropdown.js"></script> <!-- Enlace al script del desplegable añadido -->
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            mainTitle: "Rutas por el País Vasco",
+            bienvenida: "Bienvenido a la guía de rutas turísticas del País Vasco.",
+            explora: "Explora la belleza natural y cultural de esta región a través de nuestras rutas seleccionadas.",
+            busca: "Ya sea que busques aventuras al aire libre, gastronomía local o actividades para toda la familia, aquí encontrarás lo que necesitas.",
+            hazclic: "Haz clic en los enlaces de arriba para descubrir rutas específicas según tus intereses.",
+            osmLink: "Explorar en OpenStreetMap",
+            disfruta: "¡Disfruta de tu viaje!",
+            contacta: "Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            navRepos: "Mis Repositorios ▼",
+            historiaEuskadiTitulo: "Euskadi: Tierra de Historia y Cultura",
+            historiaEuskadi: "El País Vasco (<strong>Euskadi</strong> en euskera) es una comunidad autónoma con una identidad única, lengua propia y una historia milenaria. Sus paisajes verdes y su cultura ancestral la convierten en un destino especial en Europa.",
+            historiaBizkaiaTitulo: "Bizkaia: Corazón Industrial y Marítimo",
+            historiaBizkaia: "<strong>Bizkaia</strong> es conocida por su tradición marinera, su industria y su capital, Bilbao. El Puente Colgante de Portugalete y el Museo Guggenheim son símbolos de su modernidad y su historia.",
+            historiaGetxoTitulo: "Getxo: Belleza Costera y Patrimonio",
+            historiaGetxo: "<strong>Getxo</strong> destaca por sus playas, acantilados y barrios históricos como Algorta. Es un lugar ideal para pasear junto al mar y descubrir la arquitectura señorial de sus palacetes.",
+            historiaArtazaTitulo: "Palacio Artaza: Elegancia en Leioa",
+            historiaArtaza: "El <strong>Palacio Artaza</strong>, construido a principios del siglo XX, es uno de los edificios más emblemáticos de Leioa y Bizkaia. Rodeado de jardines, fue residencia de la nobleza y hoy es un espacio para eventos y cultura."
+        },
+        eu: {
+            mainTitle: "Euskal Herriko Ibilbideak",
+            bienvenida: "Ongi etorri Euskal Herriko ibilbideen gidara.",
+            explora: "Eskualde honen edertasun naturala eta kulturala ezagutu gure ibilbide hautatuen bidez.",
+            busca: "Aire zabaleko abenturak, tokiko gastronomia edo familia osoarentzako jarduerak bilatzen badituzu, hemen aurkituko duzu behar duzuna.",
+            hazclic: "Goiko esteketan klik egin zure interesen araberako ibilbideak ezagutzeko.",
+            osmLink: "Arakatu OpenStreetMap-en",
+            disfruta: "Gozatu zure bidaiari!",
+            contacta: "Galderarik baduzu edo informazio gehiago behar baduzu, jar zaitez gurekin harremanetan.",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            navRepos: "Nire Biltegiak ▼",
+            historiaEuskadiTitulo: "Euskadi: Historia eta Kultura Lurra",
+            historiaEuskadi: "Euskal Herria (<strong>Euskadi</strong> euskaraz) nortasun berezia, hizkuntza propioa eta historia luzea duen autonomia-erkidegoa da. Bere paisaia berdeek eta kultura zaharrak Europan helmuga berezi bihurtzen dute.",
+            historiaBizkaiaTitulo: "Bizkaia: Industria eta Itsas Bihotza",
+            historiaBizkaia: "<strong>Bizkaia</strong> bere itsas tradizioagatik, industriagatik eta hiriburua, Bilbo, ezaguna da. Portugaleteko Zubi Zintzilikaria eta Guggenheim Museoa bere modernitatearen eta historiaren ikurrak dira.",
+            historiaGetxoTitulo: "Getxo: Kostaldeko Edertasuna eta Ondarea",
+            historiaGetxo: "<strong>Getxo</strong> bere hondartzak, labarrak eta Algorta bezalako auzo historikoengatik nabarmentzen da. Itsasertzean paseatzeko eta jauregi dotoreen arkitektura ezagutzeko leku aproposa da.",
+            historiaArtazaTitulo: "Artaza Jauregia: Leioako Dotorezia",
+            historiaArtaza: "<strong>Artaza Jauregia</strong>, XX. mendearen hasieran eraikia, Leioako eta Bizkaiako eraikin enblematikoenetako bat da. Lorategiz inguratuta, nobleziaren egoitza izan zen eta gaur egun ekitaldi eta kulturarako gunea da."
+        },
+        en: {
+            mainTitle: "Routes in the Basque Country",
+            bienvenida: "Welcome to the Basque Country tourist routes guide.",
+            explora: "Explore the natural and cultural beauty of this region through our selected routes.",
+            busca: "Whether you seek outdoor adventures, local gastronomy, or family activities, you'll find what you need here.",
+            hazclic: "Click the links above to discover routes according to your interests.",
+            osmLink: "Explore on OpenStreetMap",
+            disfruta: "Enjoy your trip!",
+            contacta: "If you have any questions or need more information, feel free to contact us.",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            navRepos: "My Repositories ▼",
+            historiaEuskadiTitulo: "Euskadi: Land of History and Culture",
+            historiaEuskadi: "The Basque Country (<strong>Euskadi</strong> in Basque) is an autonomous community with a unique identity, its own language, and an ancient history. Its green landscapes and ancestral culture make it a special destination in Europe.",
+            historiaBizkaiaTitulo: "Bizkaia: Industrial and Maritime Heart",
+            historiaBizkaia: "<strong>Bizkaia</strong> is known for its seafaring tradition, industry, and its capital, Bilbao. The Vizcaya Bridge and the Guggenheim Museum are symbols of its modernity and history.",
+            historiaGetxoTitulo: "Getxo: Coastal Beauty and Heritage",
+            historiaGetxo: "<strong>Getxo</strong> stands out for its beaches, cliffs, and historic neighborhoods like Algorta. It's an ideal place to walk by the sea and discover the stately architecture of its mansions.",
+            historiaArtazaTitulo: "Artaza Palace: Elegance in Leioa",
+            historiaArtaza: "<strong>Artaza Palace</strong>, built at the beginning of the 20th century, is one of the most emblematic buildings in Leioa and Bizkaia. Surrounded by gardens, it was once a noble residence and today is a venue for events and culture."
+        },
+        de: {
+            mainTitle: "Routen im Baskenland",
+            bienvenida: "Willkommen beim Reiseführer für das Baskenland.",
+            explora: "Entdecken Sie die natürliche und kulturelle Schönheit dieser Region mit unseren ausgewählten Routen.",
+            busca: "Ob Outdoor-Abenteuer, lokale Gastronomie oder Aktivitäten für die ganze Familie – hier finden Sie, was Sie suchen.",
+            hazclic: "Klicken Sie oben auf die Links, um Routen nach Ihren Interessen zu entdecken.",
+            osmLink: "Auf OpenStreetMap erkunden",
+            disfruta: "Gute Reise!",
+            contacta: "Wenn Sie Fragen haben oder weitere Informationen benötigen, kontaktieren Sie uns gerne.",
+            navPareja: "Für Paare",
+            navPerros: "Mit Hunden",
+            navNinos: "Mit Kindern",
+            navEscalada: "Klettern",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomie",
+            navAventura: "Abenteuer",
+            navMTB: "MTB",
+            contacto: "Kontakt",
+            navRepos: "Meine Repositories ▼",
+            historiaEuskadiTitulo: "Euskadi: Land der Geschichte und Kultur",
+            historiaEuskadi: "Das Baskenland (<strong>Euskadi</strong> auf Baskisch) ist eine autonome Gemeinschaft mit einzigartiger Identität, eigener Sprache und uralter Geschichte. Seine grünen Landschaften und seine Kultur machen es zu einem besonderen Reiseziel in Europa.",
+            historiaBizkaiaTitulo: "Bizkaia: Industrielles und maritimes Herz",
+            historiaBizkaia: "<strong>Bizkaia</strong> ist bekannt für seine Seefahrertradition, Industrie und seine Hauptstadt Bilbao. Die Hängebrücke von Portugalete und das Guggenheim-Museum sind Symbole seiner Modernität und Geschichte.",
+            historiaGetxoTitulo: "Getxo: Küstenschönheit und Erbe",
+            historiaGetxo: "<strong>Getxo</strong> besticht durch seine Strände, Klippen und historische Viertel wie Algorta. Ideal für Spaziergänge am Meer und um die herrschaftliche Architektur zu entdecken.",
+            historiaArtazaTitulo: "Palast Artaza: Eleganz in Leioa",
+            historiaArtaza: "Der <strong>Palast Artaza</strong>, Anfang des 20. Jahrhunderts erbaut, ist eines der bekanntesten Gebäude in Leioa und Bizkaia. Umgeben von Gärten, war er einst Adelssitz und ist heute ein Ort für Veranstaltungen und Kultur."
+        },
+        fr: {
+            mainTitle: "Itinéraires au Pays Basque",
+            bienvenida: "Bienvenue dans le guide des itinéraires touristiques du Pays Basque.",
+            explora: "Découvrez la beauté naturelle et culturelle de cette région à travers nos itinéraires sélectionnés.",
+            busca: "Que vous recherchiez des aventures en plein air, la gastronomie locale ou des activités familiales, vous trouverez ici ce qu'il vous faut.",
+            hazclic: "Cliquez sur les liens ci-dessus pour découvrir des itinéraires selon vos intérêts.",
+            osmLink: "Explorer sur OpenStreetMap",
+            disfruta: "Bon voyage !",
+            contacta: "Si vous avez des questions ou besoin de plus d'informations, n'hésitez pas à nous contacter.",
+            navPareja: "En couple",
+            navPerros: "Avec des chiens",
+            navNinos: "Avec des enfants",
+            navEscalada: "Escalade",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomie",
+            navAventura: "Aventure",
+            navMTB: "VTT",
+            contacto: "Contactez-moi",
+            navRepos: "Mes Dépôts ▼",
+            historiaEuskadiTitulo: "Euskadi : Terre d'Histoire et de Culture",
+            historiaEuskadi: "Le Pays Basque (<strong>Euskadi</strong> en basque) est une communauté autonome avec une identité unique, une langue propre et une histoire millénaire. Ses paysages verts et sa culture ancestrale en font une destination spéciale en Europe.",
+            historiaBizkaiaTitulo: "Bizkaia : Cœur industriel et maritime",
+            historiaBizkaia: "<strong>Bizkaia</strong> est connue pour sa tradition maritime, son industrie et sa capitale, Bilbao. Le Pont suspendu de Portugalete et le Musée Guggenheim sont des symboles de sa modernité et de son histoire.",
+            historiaGetxoTitulo: "Getxo : Beauté côtière et patrimoine",
+            historiaGetxo: "<strong>Getxo</strong> se distingue par ses plages, ses falaises et ses quartiers historiques comme Algorta. C'est un lieu idéal pour se promener en bord de mer et découvrir l'architecture de ses demeures.",
+            historiaArtazaTitulo: "Palais Artaza : Élégance à Leioa",
+            historiaArtaza: "Le <strong>Palais Artaza</strong>, construit au début du XXe siècle, est l'un des bâtiments les plus emblématiques de Leioa et de Bizkaia. Entouré de jardins, il fut la résidence de la noblesse et accueille aujourd'hui des événements culturels."
+        },
+        ru: {
+            mainTitle: "Маршруты по Стране Басков",
+            bienvenida: "Добро пожаловать в путеводитель по туристическим маршрутам Страны Басков.",
+            explora: "Исследуйте природную и культурную красоту этого региона с нашими избранными маршрутами.",
+            busca: "Ищете ли вы приключения на природе, местную гастрономию или семейные мероприятия — здесь вы найдете всё необходимое.",
+            hazclic: "Нажмите на ссылки выше, чтобы узнать маршруты по интересам.",
+            osmLink: "Исследовать на OpenStreetMap",
+            disfruta: "Приятного путешествия!",
+            contacta: "Если у вас есть вопросы или нужна дополнительная информация, свяжитесь с нами.",
+            navPareja: "Для пар",
+            navPerros: "С собаками",
+            navNinos: "С детьми",
+            navEscalada: "Скалолазание",
+            navSkate: "Скейт",
+            navGastronomia: "Гастрономия",
+            navAventura: "Приключения",
+            navMTB: "MTB",
+            contacto: "Связаться",
+            navRepos: "Мои Репозитории ▼",
+            historiaEuskadiTitulo: "Эускади: Земля истории и культуры",
+            historiaEuskadi: "Страна Басков (<strong>Эускади</strong> на баскском) — автономное сообщество с уникальной идентичностью, собственным языком и древней историей. Зеленые пейзажи и культура делают её особым местом в Европе.",
+            historiaBizkaiaTitulo: "Бискайя: Индустриальное и морское сердце",
+            historiaBizkaia: "<strong>Бискайя</strong> известна морскими традициями, промышленностью и столицей Бильбао. Висячий мост в Португалете и музей Гуггенхайма — символы её современности и истории.",
+            historiaGetxoTitulo: "Гечо: Побережье и наследие",
+            historiaGetxo: "<strong>Гечо</strong> славится пляжами, утёсами и историческими районами, такими как Алгорта. Это отличное место для прогулок у моря и знакомства с архитектурой особняков.",
+            historiaArtazaTitulo: "Дворец Артаса: Элегантность в Лейоа",
+            historiaArtaza: "<strong>Дворец Артаса</strong>, построенный в начале XX века, — одно из самых известных зданий Лейоа и Бискайи. Окружённый садами, он был резиденцией знати, а сегодня — место для мероприятий и культуры."
+        },
+        ar: {
+            mainTitle: "مسارات في بلاد الباسك",
+            bienvenida: "مرحبًا بك في دليل مسارات السياحة في بلاد الباسك.",
+            explora: "استكشف الجمال الطبيعي والثقافي لهذه المنطقة من خلال مساراتنا المختارة.",
+            busca: "سواء كنت تبحث عن مغامرات في الهواء الطلق أو المأكولات المحلية أو أنشطة عائلية، ستجد هنا ما تحتاجه.",
+            hazclic: "انقر على الروابط أعلاه لاكتشاف المسارات حسب اهتماماتك.",
+            osmLink: "استكشف على OpenStreetMap",
+            disfruta: "نتمنى لك رحلة سعيدة!",
+            contacta: "إذا كان لديك أي أسئلة أو تحتاج إلى مزيد من المعلومات، لا تتردد في التواصل معنا.",
+            navPareja: "للأزواج",
+            navPerros: "مع الكلاب",
+            navNinos: "مع الأطفال",
+            navEscalada: "تسلق",
+            navSkate: "تزلج",
+            navGastronomia: "المأكولات",
+            navAventura: "مغامرة",
+            navMTB: "دراجة جبلية",
+            contacto: "اتصل بي",
+            navRepos: "مستودعاتي ▼",
+            historiaEuskadiTitulo: "إيوسكادي: أرض التاريخ والثقافة",
+            historiaEuskadi: "بلاد الباسك (<strong>إيوسكادي</strong> بالباسكية) منطقة ذاتية الحكم بهوية فريدة ولغة خاصة وتاريخ عريق. مناظرها الخضراء وثقافتها العريقة تجعلها وجهة مميزة في أوروبا.",
+            historiaBizkaiaTitulo: "بيسكاي: القلب الصناعي والبحري",
+            historiaBizkaia: "<strong>بيسكاي</strong> معروفة بتقاليدها البحرية وصناعتها وعاصمتها بلباو. جسر بورتوغاليت المعلق ومتحف غوغنهايم رموز حداثتها وتاريخها.",
+            historiaGetxoTitulo: "غيتشو: جمال الساحل والتراث",
+            historiaGetxo: "<strong>غيتشو</strong> تشتهر بشواطئها ومنحدراتها وأحيائها التاريخية مثل ألغورتا. مكان مثالي للتنزه على البحر واكتشاف العمارة الفخمة.",
+            historiaArtazaTitulo: "قصر أرتاثا: أناقة في ليوا",
+            historiaArtaza: "<strong>قصر أرتاثا</strong>، الذي بني في أوائل القرن العشرين، هو أحد أشهر المباني في ليوا وبيسكاي. محاط بالحدائق، كان مقرًا للنبلاء وأصبح اليوم مكانًا للفعاليات والثقافة."
+        },
+        zh: {
+            mainTitle: "巴斯克地区路线",
+            bienvenida: "欢迎来到巴斯克地区旅游路线指南。",
+            explora: "通过我们精选的路线，探索该地区的自然与文化之美。",
+            busca: "无论您寻找户外探险、本地美食还是家庭活动，这里都能满足您的需求。",
+            hazclic: "点击上方链接，按兴趣发现专属路线。",
+            osmLink: "在 OpenStreetMap 上探索",
+            disfruta: "祝您旅途愉快！",
+            contacta: "如有疑问或需要更多信息，欢迎联系我们。",
+            navPareja: "情侣路线",
+            navPerros: "携犬同行",
+            navNinos: "亲子路线",
+            navEscalada: "攀岩",
+            navSkate: "滑板",
+            navGastronomia: "美食",
+            navAventura: "冒险",
+            navMTB: "山地车",
+            contacto: "联系我",
+            navRepos: "我的存储库 ▼",
+            historiaEuskadiTitulo: "巴斯克：历史与文化之地",
+            historiaEuskadi: "巴斯克地区（巴斯克语称为<strong>Euskadi</strong>）是一个拥有独特身份、语言和悠久历史的自治区。其绿色风光和古老文化使其成为欧洲独特的目的地。",
+            historiaBizkaiaTitulo: "比斯开：工业与海洋之心",
+            historiaBizkaia: "<strong>比斯开</strong>以其航海传统、工业和首府毕尔巴鄂闻名。葡萄牙特吊桥和古根海姆博物馆是其现代与历史的象征。",
+            historiaGetxoTitulo: "盖乔：海岸之美与遗产",
+            historiaGetxo: "<strong>盖乔</strong>以其海滩、悬崖和如阿尔戈塔等历史街区著称。这里是沿海漫步和欣赏豪宅建筑的理想之地。",
+            historiaArtazaTitulo: "阿塔萨宫：莱奥亚的优雅",
+            historiaArtaza: "<strong>阿塔萨宫</strong>建于20世纪初，是莱奥亚和比斯开最具代表性的建筑之一。环绕花园，曾为贵族住所，如今是举办活动和文化的场所。"
+        },
+        ja: {
+            mainTitle: "バスク地方のルート",
+            bienvenida: "バスク地方観光ルートガイドへようこそ。",
+            explora: "厳選されたルートで、この地域の自然と文化の美しさを体験しましょう。",
+            busca: "アウトドア、地元グルメ、家族向けアクティビティなど、ここで必要なものが見つかります。",
+            hazclic: "上のリンクをクリックして、興味に合わせたルートを見つけてください。",
+            osmLink: "OpenStreetMap で探索",
+            disfruta: "良い旅を！",
+            contacta: "ご質問や詳細情報が必要な場合は、お気軽にご連絡ください。",
+            navPareja: "カップル向け",
+            navPerros: "犬と一緒に",
+            navNinos: "子供と一緒に",
+            navEscalada: "クライミング",
+            navSkate: "スケート",
+            navGastronomia: "グルメ",
+            navAventura: "冒険",
+            navMTB: "MTB",
+            contacto: "お問い合わせ",
+            navRepos: "私のリポジトリ ▼",
+            historiaEuskadiTitulo: "エウスカディ：歴史と文化の地",
+            historiaEuskadi: "バスク地方（バスク語で<strong>Euskadi</strong>）は、独自のアイデンティティ、言語、長い歴史を持つ自治州です。緑豊かな風景と伝統文化が、ヨーロッパでも特別な目的地にしています。",
+            historiaBizkaiaTitulo: "ビスカヤ：産業と海の中心地",
+            historiaBizkaia: "<strong>ビスカヤ</strong>は、海洋伝統、産業、そして首都ビルバオで知られています。ポルトガレテの吊り橋やグッゲンハイム美術館は、その現代性と歴史の象徴です。",
+            historiaGetxoTitulo: "ゲチョ：海岸の美と遺産",
+            historiaGetxo: "<strong>ゲチョ</strong>は、ビーチや断崖、アルゴルタなどの歴史的な地区で有名です。海辺の散歩や邸宅建築の発見に最適な場所です。",
+            historiaArtazaTitulo: "アルタサ宮殿：レイオアの優雅さ",
+            historiaArtaza: "<strong>アルタサ宮殿</strong>は20世紀初頭に建てられ、レイオアとビスカヤで最も象徴的な建物の一つです。庭園に囲まれ、かつては貴族の邸宅、現在はイベントや文化の場となっています。"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitle;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                if (el.tagName === 'H2' || el.tagName === 'P' || el.tagName === 'BUTTON') {
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkmode');
+        if(document.body.classList.contains('darkmode')) {
+            toggle.textContent = '☀️';
+        } else {
+            toggle.textContent = '🌙';
+        }
+    });
+    </script>
+
+    <!-- Botón de donación PayPal fijo abajo a la derecha -->
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS',
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>

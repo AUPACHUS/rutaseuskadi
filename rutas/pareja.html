@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas en pareja - Rutas País Vasco</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="darkmode">
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava"><img src="../img/mapa_alava.png" alt="Álava" /><span>Álava</span></a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia"><img src="../img/mapa_bizkaia.png" alt="Bizkaia" /><span>Bizkaia</span></a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa"><img src="../img/mapa_gipuzkoa.png" alt="Gipuzkoa" /><span>Gipuzkoa</span></a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra"><img src="../img/mapa_navarra.png" alt="Navarra" /><span>Navarra</span></a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria"><img src="../img/mapa_cantabria.png" alt="Cantabria" /><span>Cantabria</span></a>
+    </aside>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='../index.html'" data-key="navHome">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="pareja.html" class="active" data-key="navPareja">En pareja</a></li>
+                <li><a href="perros.html" data-key="navPerros">Con perros</a></li>
+                <li><a href="niños.html" data-key="navNinos">Con niños</a></li>
+                <li><a href="escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="skate.html" data-key="navSkate">Skate</a></li>
+                <li><a href="gastronomia.html" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button>
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/Rutas-Pais-Vasco" target="_blank" rel="noopener noreferrer">Rutas País Vasco (Este Proyecto)</a>
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">Mi Perfil Principal</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">Mi Web Personal (web2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="window.location.href='mailto:tartemugiocursojava@gmail.com'" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title" data-key="mainTitlePareja">Rutas en pareja</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+            <!-- Podrías añadir más idiomas si es necesario, como en index.html -->
+        </div>
+    </header>
+    <main>
+     <p data-key="introPareja">Descubre las mejores rutas románticas para disfrutar en pareja por el País Vasco.</p>
+        <div class="cuadro-historia">
+            <h2 data-key="subtituloPareja">El País Vasco en pareja: ideas y rincones románticos</h2>
+            <p data-key="descPareja1">
+                El País Vasco es un destino ideal para parejas, con una mezcla de paisajes espectaculares, pueblos con encanto, gastronomía exquisita y rincones románticos. Aquí tienes algunas ideas para visitar en pareja:
+            </p>
+            <ol>
+                <li>
+                    <strong>San Juan de Gaztelugatxe (Bizkaia)</strong><br>
+                    Un lugar mágico con una escalinata de 241 escalones que lleva a una ermita en lo alto de un islote. Las vistas al mar son impresionantes.<br>
+                    Ideal para vivir un momento especial, especialmente al atardecer.
+                </li>
+                <li>
+                    <strong>San Sebastián / Donostia (Gipuzkoa)</strong><br>
+                    La playa de La Concha: Un paseo romántico junto al mar.<br>
+                    Monte Igueldo: Sube en el funicular para disfrutar de vistas panorámicas.<br>
+                    Parte Vieja: Tapeo en pareja en bares como La Cuchara de San Telmo o Gandarias.<br>
+                    Peine del Viento (Chillida Leku): Obra de Eduardo Chillida junto al mar, muy evocadora.
+                </li>
+                <li>
+                    <strong>Vitoria-Gasteiz (Álava)</strong><br>
+                    Casco Medieval: Calles empedradas y plazas llenas de historia.<br>
+                    Parque de Salburua: Un entorno natural perfecto para un picnic.<br>
+                    Bodegas de la Rioja Alavesa: Visita alguna bodega con cata de vinos (como Marqués de Riscal).
+                </li>
+                <li>
+                    <strong>Bermeo y la Reserva de Urdaibai (Bizkaia)</strong><br>
+                    Isla de Izaro: Un lugar tranquilo y pintoresco.<br>
+                    Pueblo de Mundaka: Con su famosa ola izquierda y ambiente surfista.<br>
+                    Bosque de Oma (Kortezubi): Un museo al aire libre con árboles pintados por Agustín Ibarrola.
+                </li>
+                <li>
+                    <strong>Laguardia (Álava)</strong><br>
+                    Un precioso pueblo medieval amurallado, perfecto para pasear entre bodegas y disfrutar de un atardecer desde sus miradores.
+                </li>
+                <li>
+                    <strong>Hondarribia (Gipuzkoa)</strong><br>
+                    Barrio de la Marina: Calles coloridas y ambiente marinero.<br>
+                    Paseo junto al Bidasoa: Muy romántico, con vistas a Francia.
+                </li>
+                <li>
+                    <strong>Valle de Salazar (Navarra, cerca del País Vasco)</strong><br>
+                    Selva de Irati: Uno de los bosques más bonitos de España, ideal para una escapada en otoño o primavera.
+                </li>
+                <li>
+                    <strong>Zarautz y Getaria (Gipuzkoa)</strong><br>
+                    Zarautz: Playa larga y ambiente relajado.<br>
+                    Getaria: Pueblo pesquero con excelentes restaurantes (como Elkano) y el museo Balenciaga.
+                </li>
+                <li>
+                    <strong>Flysch de Zumaia (Gipuzkoa)</strong><br>
+                    Acantilados espectaculares con formaciones rocosas únicas. Un paseo en barco o a pie por la playa de Itzurun es inolvidable.
+                </li>
+                <li>
+                    <strong>Balnearios románticos</strong><br>
+                    Balneario de Araxa (Álava) o Balneario de La Perla (San Sebastián): Para un día de relax juntos.
+                </li>
+            </ol>
+            <h3 data-key="gastroParejaTitulo">Experiencias gastronómicas para parejas</h3>
+            <ul>
+                <li data-key="gastroPareja1">Cena en un asador tradicional (como Asador Etxebarri en Axpe).</li>
+                <li data-key="gastroPareja2">Degustación de pintxos en San Sebastián.</li>
+                <li data-key="gastroPareja3">Menú degustación en un restaurante con estrella Michelin (como Azurmendi o Arzak).</li>
+            </ul>
+            <p data-key="descPareja2">
+                El País Vasco ofrece una combinación perfecta de naturaleza, cultura y gastronomía, ideal para una escapada romántica. ¿Buscas algo más activo, tranquilo o gourmet?
+            </p>
+            <p><strong data-key="despedidaPareja">¡Disfruten del viaje! 💑✨</strong></p>
+        
+        <!-- CONTENIDO DE LA SECCIÓN EN PAREJA AQUÍ -->
+    </main>
+    <footer>
+        <p>© 2022 - Rutas País Vasco-AUPACHUS</p>
+    </footer>
+    <script src="../js/background.js" defer></script>
+    <script src="../js/dropdown.js" defer></script>
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            navHome: "Inicio",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            mainTitlePareja: "Rutas en pareja",
+            navRepos: "Mis Repositorios ▼",
+            introPareja: "Descubre las mejores rutas románticas para disfrutar en pareja por el País Vasco.",
+            subtituloPareja: "El País Vasco en pareja: ideas y rincones románticos",
+            descPareja1: "El País Vasco es un destino ideal para parejas, con una mezcla de paisajes espectaculares, pueblos con encanto, gastronomía exquisita y rincones románticos. Aquí tienes algunas ideas para visitar en pareja:",
+            gastroParejaTitulo: "Experiencias gastronómicas para parejas",
+            gastroPareja1: "Cena en un asador tradicional (como Asador Etxebarri en Axpe).",
+            gastroPareja2: "Degustación de pintxos en San Sebastián.",
+            gastroPareja3: "Menú degustación en un restaurante con estrella Michelin (como Azurmendi o Arzak).",
+            descPareja2: "El País Vasco ofrece una combinación perfecta de naturaleza, cultura y gastronomía, ideal para una escapada romántica. ¿Buscas algo más activo, tranquilo o gourmet?",
+            despedidaPareja: "¡Disfruten del viaje! 💑✨"
+        },
+        eu: {
+            navHome: "Hasiera",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            mainTitlePareja: "Ibilbideak bikotean",
+            navRepos: "Nire Biltegiak ▼",
+            introPareja: "Ezagutu Euskal Herrian bikotean gozatzeko ibilbide erromantiko onenak.",
+            subtituloPareja: "Euskal Herria bikotean: ideia eta txoko erromantikoak",
+            descPareja1: "Euskal Herria bikoteentzako helmuga aproposa da, paisaia ikusgarriak, herri xarmagarriak, gastronomia bikaina eta txoko erromantikoak nahasten dituena. Hona hemen bikotean bisitatzeko ideia batzuk:",
+            gastroParejaTitulo: "Esperientzia gastronomikoak bikoteentzat",
+            gastroPareja1: "Afaria ohiko erretegi batean (Axpeko Asador Etxebarri, adibidez).",
+            gastroPareja2: "Pintxo dastaketa Donostian.",
+            gastroPareja3: "Dastatze menua Michelin izarra duen jatetxe batean (Azurmendi edo Arzak, adibidez).",
+            descPareja2: "Euskal Herriak natura, kultura eta gastronomiaren konbinazio perfektua eskaintzen du, ihesaldi erromantiko baterako aproposa. Zerbait aktiboagoa, lasaiagoa edo gourmetagoa bilatzen duzu?",
+            despedidaPareja: "Gozatu bidaiaz! 💑✨"
+        },
+        en: {
+            navHome: "Home",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            mainTitlePareja: "Routes for couples",
+            navRepos: "My Repositories ▼",
+            introPareja: "Discover the best romantic routes to enjoy as a couple in the Basque Country.",
+            subtituloPareja: "The Basque Country for couples: ideas and romantic spots",
+            descPareja1: "The Basque Country is an ideal destination for couples, with a mix of spectacular landscapes, charming towns, exquisite gastronomy, and romantic corners. Here are some ideas to visit as a couple:",
+            gastroParejaTitulo: "Gastronomic experiences for couples",
+            gastroPareja1: "Dinner at a traditional grill (like Asador Etxebarri in Axpe).",
+            gastroPareja2: "Pintxos tasting in San Sebastián.",
+            gastroPareja3: "Tasting menu at a Michelin-starred restaurant (like Azurmendi or Arzak).",
+            descPareja2: "The Basque Country offers a perfect combination of nature, culture, and gastronomy, ideal for a romantic getaway. Are you looking for something more active, quiet, or gourmet?",
+            despedidaPareja: "Enjoy the trip! 💑✨"
+        }
+        // Puedes añadir más idiomas (de, fr, ru, ar, zh, ja) si es necesario,
+        // traduciendo las claves específicas de esta página.
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitlePareja || translations[lang].mainTitle; // Fallback por si acaso
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                if (el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'P' || el.tagName === 'BUTTON' || el.tagName === 'STRONG' || el.tagName === 'LI') {
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkmode');
+        if(document.body.classList.contains('darkmode')) {
+            toggle.textContent = '☀️';
+        } else {
+            toggle.textContent = '🌙';
+        }
+    });
+
+    // Cambia automáticamente la imagen de fondo cada 20 segundos
+    const fondoNaturaleza = [
+        '../img/naturaleza1.jpg',
+        '../img/naturaleza2.jpg',
+        '../img/naturaleza3.jpg',
+        '../img/naturaleza4.jpg',   
+        '../img/naturaleza5.jpg',
+        '../img/naturaleza6.jpg',
+        '../img/naturaleza7.jpg',
+        '../img/naturaleza8.jpg',
+        '../img/naturaleza9.jpg',
+        '../img/naturaleza10.jpg',
+        '../img/naturaleza11.jpg',
+        '../img/naturaleza12.jpg',
+        '../img/naturaleza13.jpg',                  
+         // Añade más imágenes si lo deseas
+        // Añade más si tienes más imágenes
+    ];
+    let fondoIndex = 0;
+    const bgDiv = document.getElementById('background-image');
+    function cambiarFondo() {
+        bgDiv.style.backgroundImage = `url('${fondoNaturaleza[fondoIndex]}')`;
+        fondoIndex = (fondoIndex + 1) % fondoNaturaleza.length;
+    }
+    cambiarFondo();
+    setInterval(cambiarFondo, 20000);
+    </script>
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS',
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>

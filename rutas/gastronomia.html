@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Gastronómica del Norte de España</title>    
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        #main-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .darkmode #main-title {
+            color: #eee;
+        }
+
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .darkmode main {
+            background-color: rgba(51, 51, 51, 0.9);
+        }
+
+        
+        .cuadro-historia {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .darkmode .cuadro-historia {
+            background-color: #333;
+            border-color: #555;
+        }
+        
+        .restaurante {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .darkmode .restaurante {
+            background-color: #444;
+            border-color: #555;
+        }
+        
+        .restaurante h2 {
+            color: #e74c3c;
+            margin-top: 0;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* This image style seems specific to the main restaurant image */
+        .restaurante img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        /* Gallery styles */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        /* Gallery image styles */
+        .galeria img {
+            height: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .galeria img:hover {
+            /* This hover effect is specific to gallery images */
+            transform: scale(1.05);
+        }
+        
+        .tipo {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        
+        .precio {
+            background-color: #3498db;
+            color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #2c3e50;
+        }
+        
+        .darkmode footer {
+            color: #eee;
+        }
+
+        #map-sidebar {
+            position: fixed;
+            top: 20px; /* Alineada cerca del borde superior */
+            left: 20px; /* Posicionada en el lado izquierdo */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        #map-sidebar a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #2c3e50;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .darkmode #map-sidebar a {
+            background-color: rgba(51, 51, 51, 0.9);
+            color: #eee;
+        }
+        
+        #map-sidebar a:hover {
+            transform: translateX(-5px);
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        /* Map sidebar image styles */
+        #map-sidebar img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+        
+        #map-sidebar span {
+            /* Map sidebar text style */
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #map-sidebar {
+                display: none;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin: 1rem 0;
+            }
+            
+            .navbar li {
+                margin: 0.5rem;
+            }
+            
+            .galeria {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Modal styles */
+        /* Modal para imágenes */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            margin-top: 5vh;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #e74c3c;
+        }
+        /* End Modal styles */
+    </style>
+</head>
+<body class="darkmode">
+    <div id="background-top"></div>
+    <div id="background-bottom"></div>
+    <div id="background-image"></div>
+    
+    <!-- Accesos directos a mapas -->
+    <aside id="map-sidebar">
+        <a href="https://www.google.com/maps/place/%C3%81lava" target="_blank" title="Mapa de Álava">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Flag_of_%C3%81lava.svg/1200px-Flag_of_%C3%81lava.svg.png" alt="Álava" /><span>Álava</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Bizkaia" target="_blank" title="Mapa de Bizkaia">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Biscay.svg/1200px-Flag_of_Biscay.svg.png" alt="Bizkaia" /><span>Bizkaia</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Gipuzkoa" target="_blank" title="Mapa de Gipuzkoa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Flag_of_Gipuzkoa.svg/1200px-Flag_of_Gipuzkoa.svg.png" alt="Gipuzkoa" /><span>Gipuzkoa</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Navarra" target="_blank" title="Mapa de Navarra">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Flag_of_Navarre.svg/1200px-Flag_of_Navarre.svg.png" alt="Navarra" /><span>Navarra</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Cantabria" target="_blank" title="Mapa de Cantabria">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Flag_of_Cantabria.svg/1200px-Flag_of_Cantabria.svg.png" alt="Cantabria" /><span>Cantabria</span>
+        </a>
+    </aside>
+    
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <button class="home-btn" onclick="window.location.href='../index.html'">Inicio</button>
+            </div>
+            <ul>
+                <li><a href="pareja.html" data-key="navPareja">En pareja</a></li>
+                <li><a href="perros.html" data-key="navPerros">Con perros</a></li>
+                <li><a href="niños.html" data-key="navNinos">Con niños</a></li>
+                <li><a href="escalada.html" data-key="navEscalada">Escalada</a></li>
+                <li><a href="skate.html" data-key="navSkate">Skate</a></li>
+                <li><a href="gastronomia.html" class="active" data-key="navGastronomia">Gastronomía</a></li>
+                <li><a href="moto125.html" data-key="navAventura">Aventura</a></li>
+                <li><a href="camper.html" data-key="navMTB">MTB</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="dropdown">
+                    <button class="dropdown-toggle-btn" id="repo-dropdown-btn" data-key="navRepos">Mis Repositorios ▼</button>
+                    <div class="dropdown-content" id="repo-dropdown-content">
+                        <a href="https://github.com/AUPACHUS/Rutas-Pais-Vasco" target="_blank" rel="noopener noreferrer">Rutas País Vasco (Este Proyecto)</a>
+                        <a href="https://github.com/AUPACHUS/AUPACHUS" target="_blank" rel="noopener noreferrer">Mi Perfil Principal</a>
+                        <a href="https://aupachus.github.io/web2/#top" target="_blank" rel="noopener noreferrer">Mi Web Personal (web2)</a>
+                        <a href="https://aupachus.github.io/HACKENVIRONMENT/" target="_blank" rel="noopener noreferrer">Hack Environment</a>
+                        <a href="https://github.com/AUPACHUS?tab=repositories" target="_blank" rel="noopener noreferrer">Todos mis Repositorios</a>
+                    </div>
+                </div>
+                <button class="contact-btn" id="contact-btn" data-key="contacto">Contáctame</button>
+                <button class="darkmode-btn" id="darkmode-toggle" title="Alternar modo oscuro">☀️</button>
+            </div>
+        </nav>
+        <h1 id="main-title">Guía Gastronómica del Norte de España</h1>
+        <div id="lang-switcher" style="margin:1em 0; text-align:center;">
+            <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+            <button class="lang-btn" data-lang="eu" title="Euskera">🇪🇺</button>
+            <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+        </div>
+    </header>
+    
+    <main>
+        <p>Descubre los mejores lugares para disfrutar de la gastronomía vasca, navarra y cántabra. Desde sidrerías tradicionales hasta restaurantes con estrella Michelin, esta guía te llevará por un viaje culinario inolvidable.</p>
+        
+        <div class="cuadro-historia">
+            <h2>La Gastronomía del Norte: Un Patrimonio Cultural</h2>
+            <p>
+                El norte de España es reconocido mundialmente por su excelente gastronomía. Desde los pintxos de San Sebastián hasta las anchoas de Santoña, pasando por los vinos de La Rioja y la sidra vasca, esta región ofrece una experiencia culinaria única. La calidad de sus productos locales, la tradición marinera y la innovación de sus chefs han convertido a esta zona en un destino imprescindible para los amantes de la buena mesa.
+            </p>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Asador Etxebarri (Axpe, Bizkaia)</h2>
+            <p><span class="tipo">ASADOR</span> <span class="precio">€€€€</span></p>
+            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Asador Etxebarri">
+            <p><strong>Ubicación:</strong> Plaza San Juan, 1, 48291 Axpe, Bizkaia</p>
+            <p><strong>Especialidad:</strong> Carnes y pescados a la parrilla con técnicas innovadoras</p>
+            <p><strong>Recomendación:</strong> Su chuletón de buey y sus gambas a la parrilla son legendarias.</p>
+            <p>Considerado por muchos como el mejor asador del mundo, el chef Bittor Arguinzoniz ha revolucionado la cocina a la parrilla con su enfoque minimalista y respeto por los ingredientes.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Plato de Etxebarri">
+                <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interior Etxebarri">
+                <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Parrilla Etxebarri">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Sidrería Petritegi (Astigarraga, Gipuzkoa)</h2>
+            <p><span class="tipo">SIDRERÍA</span> <span class="precio">€€</span></p>
+            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Sidrería Petritegi">
+            <p><strong>Ubicación:</strong> Petritegi Bidea, 82, 20115 Astigarraga, Gipuzkoa</p>
+            <p><strong>Especialidad:</strong> Menú sidrería tradicional con tortilla de bacalao, chuletón y queso con membrillo</p>
+            <p><strong>Recomendación:</strong> La experiencia completa del txotx, donde puedes probar la sidra directamente de las kupelas (barricas).</p>
+            <p>Una de las sidrerías más tradicionales y grandes del País Vasco, con capacidad para más de 500 personas. Su entorno rural y la calidad de su sidra artesana la convierten en visita obligada.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Txotx en Petritegi">
+                <img src="https://images.unsplash.com/photo-1572913017566-3679f27e1aa1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Comida sidrería">
+                <img src="https://images.unsplash.com/photo-1568219656418-15c329312bf1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Kupelas de sidra">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Baserri Maitea (Oiartzun, Gipuzkoa)</h2>
+            <p><span class="tipo">BASERRI</span> <span class="precio">€€€</span></p>
+            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Baserri Maitea">
+            <p><strong>Ubicación:</strong> Arragua Auzoa, 25, 20180 Oiartzun, Gipuzkoa</p>
+            <p><strong>Especialidad:</strong> Cocina tradicional vasca con productos de su propia huerta</p>
+            <p><strong>Recomendación:</strong> Su marmitako (guiso de bonito) y su tarta de queso casera.</p>
+            <p>Este encantador caserío del siglo XVIII ofrece una auténtica experiencia gastronómica vasca en un entorno rural idílico. Todos los productos son locales y de temporada.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Platos baserri">
+                <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Entorno baserri">
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Huerto baserri">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Casa Julián (Tolosa, Gipuzkoa)</h2>
+            <p><span class="tipo">ASADOR</span> <span class="precio">€€€</span></p>
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Casa Julián">
+            <p><strong>Ubicación:</strong> Plaza Euskal Herria, 9, 20400 Tolosa, Gipuzkoa</p>
+            <p><strong>Especialidad:</strong> Alubias de Tolosa con sacramentos y chuletón</p>
+            <p><strong>Recomendación:</strong> El menú degustación que incluye sus famosas alubias y productos de la tierra.</p>
+            <p>Un clásico de la gastronomía guipuzcoana, especializado en alubias de Tolosa (judías negras) y carnes a la parrilla. Ambiente tradicional y familiar.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1579366948924-671a6a4f0b13?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Alubias de Tolosa">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interior Casa Julián">
+                <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Chuleton Casa Julián">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Elkano (Getaria, Gipuzkoa)</h2>
+            <p><span class="tipo">MARISCO</span> <span class="precio">€€€€</span></p>
+            <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Restaurante Elkano">
+            <p><strong>Ubicación:</strong> Herrerieta Kalea, 2, 20808 Getaria, Gipuzkoa</p>
+            <p><strong>Especialidad:</strong> Pescados a la parrilla, especialmente el rodaballo</p>
+            <p><strong>Recomendación:</strong> Su rodaballo a la parrilla, considerado el mejor del mundo.</p>
+            <p>Fundado en 1964, este restaurante familiar se ha convertido en un referente mundial de la cocina de pescado a la parrilla. Su secreto: pescado de máxima calidad cocinado con técnica perfecta.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Rodaballo Elkano">
+                <img src="https://images.unsplash.com/photo-1563379926898-05bf97c6e20c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Pescados Elkano">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Parilla Elkano">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Cervecería La Virgen (Madrid, con origen en Cantabria)</h2>
+            <p><span class="tipo">CERVEZERÍA</span> <span class="precio">€€</span></p>
+            <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Cervecería La Virgen">
+            <p><strong>Ubicación:</strong> Varias ubicaciones en Madrid (origen en Camargo, Cantabria)</p>
+            <p><strong>Especialidad:</strong> Cervezas artesanales y comida para acompañar</p>
+            <p><strong>Recomendación:</strong> Su pack de degustación de cervezas y sus hamburguesas.</p>
+            <p>Aunque ahora tienen sede en Madrid, su origen está en Cantabria. Ofrecen una amplia variedad de cervezas artesanales con ingredientes del norte de España.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1572503692666-5f7a1f6e6c0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Cervezas La Virgen">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Hamburguesa La Virgen">
+                <img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Barra La Virgen">
+            </div>
+        </div>
+        
+        <div class="restaurante">
+            <h2>Mesón del Carmen (Tudela, Navarra)</h2>
+            <p><span class="tipo">RESTAURANTE</span> <span class="precio">€€€</span></p>
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Mesón del Carmen">
+            <p><strong>Ubicación:</strong> Rúa, 13, 31500 Tudela, Navarra</p>
+            <p><strong>Especialidad:</strong> Menestra de verduras y cogollos de Tudela</p>
+            <p><strong>Recomendación:</strong> Su menestra de verduras (plato estrella de la huerta navarra) y sus alcachofas.</p>
+            <p>Ubicado en el corazón de Tudela, capital de la huerta navarra, este restaurante ofrece los mejores productos de la Ribera con una cocina tradicional pero innovadora.</p>
+            
+            <div class="galeria">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Menestra navarra">
+                <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Alcachofas Tudela">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Verduras Navarra">
+            </div>
+        </div>
+        
+        <div class="cuadro-historia">
+            <h2>Consejos para disfrutar de la gastronomía del norte</h2>
+            <p>
+                <strong>Reserva con antelación:</strong> Los mejores restaurantes suelen estar completos, especialmente en temporada alta.<br><br>
+                <strong>Prueba los pintxos:</strong> En San Sebastián, Bilbao o Vitoria, el tapeo es una forma de vida. No te pierdas el Casco Viejo de Donostia.<br><br>
+                <strong>Productos de temporada:</strong> Cada época del año tiene sus especialidades (txangurro en invierno, txakoli en verano...).<br><br>
+                <strong>Visita mercados:</strong> El Mercado de la Ribera en Bilbao o San Martín en Donostia son lugares perfectos para conocer los productos locales.<br><br>
+                <strong>Deja sitio para el postre:</strong> La cuajada, la pantxineta o el canutillo de crema son imprescindibles.
+            </p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2023 - Guía Gastronómica del Norte de España</p>
+    </footer>
+    
+    <!-- Modal para imágenes -->
+    <div id="imagenModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="imgModal">
+    </div>
+    <script src="../js/dropdown.js"></script> <!-- Enlace al script del desplegable -->
+    
+    <script>
+    // Traducciones
+    const translations = {
+        es: {
+            mainTitle: "Guía Gastronómica del Norte de España",
+            bienvenida: "Descubre los mejores lugares para disfrutar de la gastronomía vasca, navarra y cántabra.",
+            navPareja: "En pareja",
+            navPerros: "Con perros",
+            navNinos: "Con niños",
+            navEscalada: "Escalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomía",
+            navAventura: "Aventura",
+            navMTB: "MTB",
+            contacto: "Contáctame",
+            navRepos: "Mis Repositorios ▼"
+        },
+        eu: {
+            mainTitle: "Iparraldeko Sukaldaritzaren Gida",
+            bienvenida: "Ezagutu Euskal Herriko, Nafarroako eta Kantabriako gastronomia leku onenak.",
+            navPareja: "Bikotean",
+            navPerros: "Txakurrekin",
+            navNinos: "Haurrekin",
+            navEscalada: "Eskalada",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomia",
+            navAventura: "Abentura",
+            navMTB: "MTB",
+            contacto: "Kontaktatu",
+            navRepos: "Nire Biltegiak ▼"
+        },
+        en: {
+            mainTitle: "Northern Spain Food Guide",
+            bienvenida: "Discover the best places to enjoy Basque, Navarrese and Cantabrian gastronomy.",
+            navPareja: "For couples",
+            navPerros: "With dogs",
+            navNinos: "With children",
+            navEscalada: "Climbing",
+            navSkate: "Skate",
+            navGastronomia: "Gastronomy",
+            navAventura: "Adventure",
+            navMTB: "MTB",
+            contacto: "Contact me",
+            navRepos: "My Repositories ▼"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.getElementById('main-title').textContent = translations[lang].mainTitle;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                el.textContent = translations[lang][key];
+            }
+        });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLanguage(btn.getAttribute('data-lang'));
+        });
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('darkmode-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkmode');
+        toggle.textContent = document.body.classList.contains('darkmode') ? '☀️' : '🌙';
+    });
+
+    // Contact button
+    document.getElementById('contact-btn').addEventListener('click', function() {
+        window.location.href = 'mailto:tartemugiocursojava@gmail.com';
+    });
+
+    // Dropdown script should be in ../js/dropdown.js and linked
+    // Modal para imágenes
+    const modal = document.getElementById("imagenModal");
+    const modalImg = document.getElementById("imgModal");
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    // Obtener todas las imágenes de la galería
+    const galleryImages = document.querySelectorAll('.galeria img');
+
+    galleryImages.forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        });
+    });
+
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+    // Ensure dropdown.js is linked, if not already:
+    // Example: <script src="../js/dropdown.js"></script>
+    // Ensure dropdown.js is linked
+    </script>
+    
+    <!-- Botón de donación PayPal fijo abajo a la derecha -->
+    <div id="donate-button-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+            env:'production',
+            hosted_button_id:'J29WKUVVJYLDS',
+            image: {
+                src:'https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif',
+                alt:'Donate with PayPal button',
+                title:'PayPal - The safer, easier way to pay online!',
+            }
+        }).render('#donate-button');
+        </script>
+    </div>
+</body>
+</html>
