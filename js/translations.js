@@ -12,6 +12,7 @@ const translations = {
         navMTB: "MTB",
         contacto: "Contáctame",
         inicio: "Inicio",
+        navComentarios: "Comentarios",
         
         // Títulos principales
         mainTitle: "Rutas por el País Vasco",
@@ -108,6 +109,7 @@ const translations = {
         navMTB: "MTB",
         contacto: "Kontaktatu",
         inicio: "Hasiera",
+        navComentarios: "Iruzkinak",
         
         // Títulos principales
         mainTitle: "Euskal Herriko Ibilbideak",
@@ -204,6 +206,7 @@ const translations = {
         navMTB: "MTB",
         contacto: "Contact me",
         inicio: "Home",
+        navComentarios: "Comments",
         
         // Main titles
         mainTitle: "Routes in the Basque Country",
@@ -301,26 +304,85 @@ const translations = {
         navMTB: "MTB",
         contacto: "Kontakt",
         inicio: "Start",
+        navComentarios: "Kommentare", // Ejemplo, verifica la traducción
         
+        // Títulos principales
         mainTitle: "Routen im Baskenland",
         parejaTitle: "Routen für Paare",
+        perrosTitle: "TODO: Translate perrosTitle", // Faltante
+        ninosTitle: "TODO: Translate ninosTitle", // Faltante
+        escaladaTitle: "TODO: Translate escaladaTitle", // Faltante
+        skateTitle: "TODO: Translate skateTitle", // Faltante
+        gastronomiaTitle: "TODO: Translate gastronomiaTitle", // Faltante
+        aventuraTitle: "TODO: Translate aventuraTitle", // Faltante
+        mtbTitle: "TODO: Translate mtbTitle", // Faltante
         
+        // Página principal (index)
         bienvenida: "Willkommen beim Reiseführer für das Baskenland.",
         explora: "Entdecken Sie die natürliche und kulturelle Schönheit dieser Region mit unseren ausgewählten Routen.",
         busca: "Ob Outdoor-Abenteuer, lokale Gastronomie oder Aktivitäten für die ganze Familie – hier finden Sie, was Sie suchen.",
         hazclic: "Klicken Sie oben auf die Links, um Routen nach Ihren Interessen zu entdecken.",
         disfruta: "Gute Reise!",
         contacta: "Wenn Sie Fragen haben oder weitere Informationen benötigen, kontaktieren Sie uns gerne.",
-        
+
+        // Página de parejas
         parejaIntro: "Entdecken Sie die besten romantischen Routen für Paare im Baskenland.",
         parejaMainTitle: "Das Baskenland für Paare: Ideen und romantische Orte",
         parejaMainDesc: "Das Baskenland ist ein ideales Reiseziel für Paare mit spektakulären Landschaften, charmanten Dörfern, exquisiter Gastronomie und romantischen Ecken. Hier sind einige Ideen für Paare:",
         
+        // Lugares específicos en pareja (Faltantes en Alemán)
+        gaztelugatxe: "TODO: Translate gaztelugatxe",
+        gaztelugatxeDesc: "TODO: Translate gaztelugatxeDesc",
+        donostia: "TODO: Translate donostia",
+        donostiaDesc: "TODO: Translate donostiaDesc",
+        vitoria: "TODO: Translate vitoria",
+        vitoriaDesc: "TODO: Translate vitoriaDesc",
+        bermeo: "TODO: Translate bermeo",
+        bermeoDesc: "TODO: Translate bermeoDesc",
+        laguardia: "TODO: Translate laguardia",
+        laguardiaDesc: "TODO: Translate laguardiaDesc",
+        hondarribia: "TODO: Translate hondarribia",
+        hondarribiaDesc: "TODO: Translate hondarribiaDesc",
+        salazar: "TODO: Translate salazar",
+        salazarDesc: "TODO: Translate salazarDesc",
+        zarautz: "TODO: Translate zarautz",
+        zarautzDesc: "TODO: Translate zarautzDesc",
+        flysch: "TODO: Translate flysch",
+        flyschDesc: "TODO: Translate flyschDesc",
+        balnearios: "TODO: Translate balnearios",
+        balneariosDesc: "TODO: Translate balneariosDesc",
+        
+        gastroTitle: "TODO: Translate gastroTitle",
+        gastroDesc1: "TODO: Translate gastroDesc1",
+        gastroDesc2: "TODO: Translate gastroDesc2",
+        gastroDesc3: "TODO: Translate gastroDesc3",
+
         parejaConclusion: "Das Baskenland bietet eine perfekte Kombination aus Natur, Kultur und Gastronomie, ideal für einen romantischen Kurzurlaub.",
-        parejaFinal: "Gute Reise! 💑✨"
+        parejaFinal: "Gute Reise! 💑✨",
+
+        // Historia (común) (Faltantes en Alemán)
+        historiaEuskadiTitulo: "TODO: Translate historiaEuskadiTitulo",
+        historiaEuskadi: "TODO: Translate historiaEuskadi",
+        historiaBizkaiaTitulo: "TODO: Translate historiaBizkaiaTitulo",
+        historiaBizkaia: "TODO: Translate historiaBizkaia",
+        historiaGetxoTitulo: "TODO: Translate historiaGetxoTitulo",
+        historiaGetxo: "TODO: Translate historiaGetxo",
+        historiaArtazaTitulo: "TODO: Translate historiaArtazaTitulo",
+        historiaArtaza: "TODO: Translate historiaArtaza",
+        
+        // Claves para la sección de comentarios (Faltantes en Alemán)
+        commentsTitle: "TODO: Translate commentsTitle",
+        loadingComments: "TODO: Translate loadingComments",
+        errorLoadingComments: "TODO: Translate errorLoadingComments",
+        noCommentsYet: "TODO: Translate noCommentsYet",
+        addCommentTitle: "TODO: Translate addCommentTitle",
+        commentAuthorLabel: "TODO: Translate commentAuthorLabel",
+        commentTextLabel: "TODO: Translate commentTextLabel",
+        submitCommentBtn: "TODO: Translate submitCommentBtn"
     },
     
     fr: {
+        // Navegación común
         navPareja: "En couple",
         navPerros: "Avec des chiens",
         navNinos: "Avec des enfants",
@@ -331,15 +393,29 @@ const translations = {
         navMTB: "VTT",
         contacto: "Contactez-moi",
         inicio: "Accueil",
-        
+        navComentarios: "Commentaires", // Ejemplo, verifica la traducción
+
+        // Títulos principales
         mainTitle: "Itinéraires au Pays Basque",
         parejaTitle: "Itinéraires en couple",
-        
+        // ... (Añadir TODAS las demás claves de título con "TODO: Translate...")
+
+        // Página principal (index)
         bienvenida: "Bienvenue dans le guide des itinéraires touristiques du Pays Basque.",
+        // ... (Añadir explora, busca, hazclic, etc. con "TODO: Translate...")
+
+        // Página de parejas
         parejaIntro: "Découvrez les meilleurs itinéraires romantiques pour les couples au Pays Basque.",
         parejaMainTitle: "Le Pays Basque en couple : idées et coins romantiques",
+        // ... (Añadir parejaMainDesc y TODAS las claves de lugares, gastro, etc. con "TODO: Translate...")
+
         parejaConclusion: "Le Pays Basque offre une combinaison parfaite de nature, culture et gastronomie, idéale pour une escapade romantique.",
-        parejaFinal: "Bon voyage ! 💑✨"
+        parejaFinal: "Bon voyage ! 💑✨",
+
+        // Historia (común)
+        // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
+        // Claves para la sección de comentarios
+        // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
     ru: {
@@ -353,14 +429,28 @@ const translations = {
         navMTB: "MTB",
         contacto: "Связаться",
         inicio: "Главная",
-        
+        navComentarios: "Комментарии", // Ejemplo, verifica la traducción
+
+        // Títulos principales
         mainTitle: "Маршруты по Стране Басков",
         parejaTitle: "Маршруты для пар",
-        
+        // ... (Añadir TODAS las demás claves de título con "TODO: Translate...")
+
+        // Página principal (index)
         bienvenida: "Добро пожаловать в путеводитель по туристическим маршрутам Страны Басков.",
+        // ... (Añadir explora, busca, hazclic, etc. con "TODO: Translate...")
+
+        // Página de parejas
         parejaIntro: "Откройте для себя лучшие романтические маршруты для пар в Стране Басков.",
+        // ... (Añadir parejaMainTitle, parejaMainDesc y TODAS las claves de lugares, gastro, etc. con "TODO: Translate...")
+
         parejaConclusion: "Страна Басков предлагает идеальное сочетание природы, культуры и гастрономии для романтического отдыха.",
-        parejaFinal: "Приятного путешествия! 💑✨"
+        parejaFinal: "Приятного путешествия! 💑✨",
+
+        // Historia (común)
+        // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
+        // Claves para la sección de comentarios
+        // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
     ar: {
@@ -374,13 +464,28 @@ const translations = {
         navMTB: "دراجة جبلية",
         contacto: "اتصل بي",
         inicio: "الرئيسية",
-        
+        navComentarios: "تعليقات", // Ejemplo, verifica la traducción
+
+        // Títulos principales
         mainTitle: "مسارات في بلاد الباسك",
         parejaTitle: "مسارات للأزواج",
-        
+        // ... (Añadir TODAS las demás claves de título con "TODO: Translate...")
+
+        // Página principal (index)
         bienvenida: "مرحبًا بك في دليل مسارات السياحة في بلاد الباسك.",
+        // ... (Añadir explora, busca, hazclic, etc. con "TODO: Translate...")
+
+        // Página de parejas
         parejaIntro: "اكتشف أفضل المسارات الرومانسية للأزواج في بلاد الباسك.",
-        parejaFinal: "نتمنى لك رحلة سعيدة! 💑✨"
+        // ... (Añadir parejaMainTitle, parejaMainDesc y TODAS las claves de lugares, gastro, etc. con "TODO: Translate...")
+
+        // parejaConclusion: "TODO: Translate parejaConclusion", // Ejemplo
+        parejaFinal: "نتمنى لك رحلة سعيدة! 💑✨",
+
+        // Historia (común)
+        // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
+        // Claves para la sección de comentarios
+        // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
     zh: {
@@ -394,11 +499,106 @@ const translations = {
         navMTB: "山地车",
         contacto: "联系我",
         inicio: "首页",
-        
+        navComentarios: "评论", // Ejemplo, verifica la traducción
+
+        // Títulos principales
         mainTitle: "巴斯克地区路线",
         parejaTitle: "情侣路线",
-        
+        // ... (Añadir TODAS las demás claves de título con "TODO: Translate...")
+
+        // Página principal (index)
         bienvenida: "欢迎来到巴斯克地区旅游路线指南。",
+        // ... (Añadir explora, busca, hazclic, etc. con "TODO: Translate...")
+
+        // Página de parejas
         parejaIntro: "探索巴斯克地区最佳浪漫情侣路线。",
+        // ... (Añadir parejaMainTitle, parejaMainDesc y TODAS las claves de lugares, gastro, etc. con "TODO: Translate...")
+
+        // parejaConclusion: "TODO: Translate parejaConclusion", // Ejemplo
         parejaFinal: "祝您旅途愉快！💑✨",
+
+        // Historia (común)
+        // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
+        // Claves para la sección de comentarios
+        // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     }
+};
+
+let currentLanguage;
+
+function setLanguage(lang) {
+    if (!translations[lang]) {
+        console.error(`Traducciones no disponibles para el idioma: ${lang}`);
+        return;
+    }
+
+    currentLanguage = lang;
+    window.currentLanguage = lang; // Hacerlo global para otros scripts
+
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang][key]) {
+            let translation = translations[lang][key];
+
+            // Si el elemento es un input, button, o textarea, podríamos necesitar cambiar 'value' o 'placeholder'
+            if (element.tagName === 'INPUT' || element.tagName === 'BUTTON') {
+                if (element.type === 'submit' || element.type === 'button' || element.tagName === 'BUTTON') {
+                    // Para botones, el texto puede estar dentro o ser el valor.
+                    // Si el data-key está en un botón que contiene texto, se actualizará con textContent.
+                    // Si es un input type button/submit, se actualiza el value.
+                    // El HTML actual usa textContent para botones.
+                    element.textContent = translation;
+                } else if (element.placeholder && translations[lang][key]) {
+                    element.placeholder = translation;
+                }
+            } else if (element.tagName === 'TEXTAREA' && element.placeholder && translations[lang][key]) {
+                 element.placeholder = translation;
+            } else {
+                // Para la mayoría de los elementos, actualizamos textContent
+                // Esto incluye <p>, <a>, <li>, <h2>, etc.
+                // También incluye el contenido de <button> si no es un input.
+                element.innerHTML = translation; // Usar innerHTML para permitir etiquetas como <strong>
+            }
+
+            // Actualizar el atributo title si existe una clave específica para él
+            // Por ejemplo, si tienes data-key="myElement" y data-title-key="myElementTitle"
+            // O si el mismo data-key se usa para el title (menos común para contenido principal)
+
+        } else {
+            console.warn(`Clave de traducción no encontrada: "${key}" para el idioma "${lang}"`);
+        }
+    });
+
+    // Actualizar el título de la página
+    // Asumimos que la clave 'mainTitle' es para el index.html.
+    // Para otras páginas, necesitarías una lógica diferente o una clave de título específica.
+    const pageTitleKey = document.body.getAttribute('data-page-title-key') || 'mainTitle'; // Default to mainTitle for index
+    if (translations[lang][pageTitleKey]) {
+        document.title = translations[lang][pageTitleKey];
+    }
+
+    // Guardar el idioma seleccionado
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Hacer `translations` y `setLanguage` globalmente accesibles
+    window.translations = translations;
+    window.setLanguage = setLanguage;
+
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const lang = button.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+
+    // Cargar el idioma preferido o establecer uno por defecto
+    const preferredLanguage = localStorage.getItem('preferredLanguage');
+    if (preferredLanguage && translations[preferredLanguage]) {
+        setLanguage(preferredLanguage);
+    } else {
+        setLanguage('es'); // Idioma por defecto
+    }
+});

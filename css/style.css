@@ -1,10 +1,21 @@
-en tod/* Toque vasco: colores de la Ikurriña (rojo, verde, blanco) */
+/* Toque vasco: colores de la Ikurriña (rojo, verde, blanco) */
+
+:root {
+    --ikurrina-red: #e30613;
+    --ikurrina-green: #009b3a;
+    --ikurrina-white: #fff;
+    --text-color-light: #222;
+    --text-color-dark: #eee;
+    --background-light: rgba(255,255,255,0.8);
+    --background-dark: rgba(20,20,20,0.7);
+    --dark-mode-accent: #1abc9c; /* Color for hover in dark mode */
+}
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #222;
+    color: var(--text-color-light);
     transition: background 0.3s, color 0.3s;
 }
 
@@ -29,27 +40,27 @@ body {
 }
 #background-top {
     top: 0;
-    background: linear-gradient(to bottom, #e30613 0%, transparent 100%);
+    background: linear-gradient(to bottom, var(--ikurrina-red) 0%, transparent 100%);
 }
 #background-bottom {
     bottom: 0;
-    background: linear-gradient(to top, #009b3a 0%, transparent 100%);
+    background: linear-gradient(to top, var(--ikurrina-green) 0%, transparent 100%);
 }
 
 /* Colores de la bandera vasca en header y navbar */
 header {
-    background: linear-gradient(90deg, #e30613 0%, #fff 50%, #009b3a 100%);
-    color: #fff;
+    background: linear-gradient(90deg, var(--ikurrina-red) 0%, var(--ikurrina-white) 50%, var(--ikurrina-green) 100%);
+    color: var(--ikurrina-white);
     padding: 1em 0;
     text-align: center;
-    border-bottom: 6px solid #009b3a;
+    border-bottom: 6px solid var(--ikurrina-green);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, #e30613 0%, #009b3a 100%);
+    background: linear-gradient(90deg, var(--ikurrina-red) 0%, var(--ikurrina-green) 100%);
     padding: 0.5em 2em;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 2px 12px #0002;
@@ -74,7 +85,7 @@ header {
 }
 
 .navbar a {
-    color: #fff;
+    color: var(--ikurrina-white);
     text-decoration: none;
     font-weight: bold;
     padding: 0.3em 0.8em;
@@ -83,13 +94,13 @@ header {
 }
 
 .navbar a:hover {
-    background: #fff;
-    color: #e30613;
+    background: var(--ikurrina-white);
+    color: var(--ikurrina-red);
 }
 
 .contact-btn {
-    background: #009b3a;
-    color: #fff;
+    background: var(--ikurrina-green);
+    color: var(--ikurrina-white);
     border: none;
     border-radius: 4px;
     padding: 0.5em 1.2em;
@@ -101,13 +112,13 @@ header {
 }
 
 .contact-btn:hover {
-    background: #e30613;
+    background: var(--ikurrina-red);
 }
 
 .home-btn {
-    background: #fff;
-    color: #e30613;
-    border: 2px solid #e30613;
+    background: var(--ikurrina-white);
+    color: var(--ikurrina-red);
+    border: 2px solid var(--ikurrina-red);
     border-radius: 4px;
     padding: 0.5em 1em;
     font-size: 1.1em;
@@ -117,14 +128,14 @@ header {
     transition: background 0.2s, color 0.2s, border 0.2s;
 }
 .home-btn:hover {
-    background: #009b3a;
-    color: #fff;
-    border: 2px solid #009b3a;
+    background: var(--ikurrina-green);
+    color: var(--ikurrina-white);
+    border: 2px solid var(--ikurrina-green);
 }
 
 .darkmode-btn {
-    background: #222;
-    color: #fff;
+    background: var(--text-color-light); /* Assuming #222 is a general dark text/bg color */
+    color: var(--ikurrina-white);
     border: none;
     border-radius: 50%;
     font-size: 1.3em;
@@ -135,8 +146,8 @@ header {
     transition: background 0.2s, color 0.2s;
 }
 .darkmode-btn:hover {
-    background: #e30613;
-    color: #fff;
+    background: var(--ikurrina-red);
+    color: var(--ikurrina-white);
 }
 
 h1 {
@@ -145,14 +156,14 @@ h1 {
     text-align: center;
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: #e30613;
-    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #009b3a;
+    color: var(--ikurrina-red);
+    text-shadow: 1px 1px 0 var(--ikurrina-white), 2px 2px 0 var(--ikurrina-green);
 }
 
 main {
     max-width: 900px;
     margin: 2rem auto;
-    background: rgba(255,255,255,0.8);
+    background: var(--background-light);
     border-radius: 12px;
     padding: 2rem;
     box-shadow: 0 4px 32px #0004;
@@ -160,9 +171,9 @@ main {
 
 /* Cuadros históricos vascos */
 .cuadro-historia {
-    background: linear-gradient(120deg, #e30613 10%, #fff 60%, #009b3a 100%);
-    color: #222;
-    border-left: 8px solid #e30613;
+    background: linear-gradient(120deg, var(--ikurrina-red) 10%, var(--ikurrina-white) 60%, var(--ikurrina-green) 100%);
+    color: var(--text-color-light);
+    border-left: 8px solid var(--ikurrina-red);
     border-radius: 10px;
     margin: 2rem 0;
     padding: 1.5rem 2rem;
@@ -170,14 +181,14 @@ main {
     font-size: 1.1em;
 }
 .cuadro-historia h2 {
-    color: #009b3a;
+    color: var(--ikurrina-green);
     margin-top: 0;
     margin-bottom: 0.5em;
     font-size: 1.3em;
     font-weight: bold;
 }
 .cuadro-historia strong {
-    color: #e30613;
+    color: var(--ikurrina-red);
 }
 
 /* Footer con bandera */
@@ -189,7 +200,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    border-top: 6px solid #fff;
+    border-top: 6px solid var(--ikurrina-white);
 }
 /* Estilos para el botón desplegable de repositorios */
 .navbar-right .dropdown {
@@ -203,8 +214,8 @@ footer {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #e74c3c; /* Example: same as contact-btn, or your primary button color */
-    color: white;
+    background-color: var(--ikurrina-red); /* Adjusted to Ikurriña red */
+    color: var(--ikurrina-white);
     font-weight: bold;
     font-family: inherit; /* Ensure it uses the same font as other buttons */
 }
@@ -228,13 +239,13 @@ footer {
 }
 
 .navbar-right .dropdown-content a {
-    color: black;
+    color: var(--text-color-light);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 .darkmode .navbar-right .dropdown-content a {
-    color: #eee;
+    color: var(--text-color-dark);
 }
 .navbar-right .dropdown-content a:hover {background-color: #f1f1f1;}
 .darkmode .navbar-right .dropdown-content a:hover {background-color: #555;}
@@ -262,7 +273,7 @@ footer {
     align-items: center;
     gap: 0.5em;
     text-decoration: none;
-    color: #222;
+    color: var(--text-color-light);
     font-weight: bold;
     font-size: 1em;
     transition: background 0.2s, color 0.2s;
@@ -270,8 +281,8 @@ footer {
     padding: 0.2em 0.5em;
 }
 #map-sidebar a:hover {
-    background: #e30613;
-    color: #fff;
+    background: var(--ikurrina-red);
+    color: var(--ikurrina-white);
 }
 #map-sidebar img {
     width: 32px;
@@ -279,7 +290,7 @@ footer {
     object-fit: contain;
     border-radius: 4px;
     border: 1px solid #ccc;
-    background: #fff;
+    background: var(--ikurrina-white);
 }
 #map-sidebar span {
     min-width: 70px;
@@ -306,38 +317,38 @@ footer {
 
 /* Dark mode styles */
 body.darkmode {
-    background: #181818 !important;
-    color: #eee !important;
+    background: #181818; /* More specific selector, !important might not be needed */
+    color: var(--text-color-dark);
 }
 body.darkmode #background-image {
     opacity: 0.3;
 }
 body.darkmode main, body.darkmode header, body.darkmode footer {
-    background: rgba(20,20,20,0.7) !important;
-    color: #eee !important;
+    background: var(--background-dark);
+    color: var(--text-color-dark);
 }
 body.darkmode .navbar a,
 body.darkmode .contact-btn,
 body.darkmode .home-btn {
-    color: #fff !important;
-    background: #222 !important;
+    color: var(--ikurrina-white);
+    background: var(--text-color-light); /* Or a specific dark mode button background */
 }
 body.darkmode .navbar a:hover,
 body.darkmode .contact-btn:hover,
 body.darkmode .home-btn:hover {
-    background: #1abc9c !important;
-    color: #fff !important;
+    background: var(--dark-mode-accent);
+    color: var(--ikurrina-white);
 }
 body.darkmode .cuadro-historia {
-    background: linear-gradient(120deg, #333 10%, #222 60%, #444 100%) !important;
-    color: #eee !important;
-    border-left: 8px solid #009b3a;
+    background: linear-gradient(120deg, #333 10%, var(--text-color-light) 60%, #444 100%);
+    color: var(--text-color-dark);
+    border-left: 8px solid var(--ikurrina-green);
 }
 body.darkmode .cuadro-historia h2 {
-    color: #e30613 !important;
+    color: var(--ikurrina-red);
 }
 body.darkmode .cuadro-historia strong {
-    color: #009b3a !important;
+    color: var(--ikurrina-green);
 }
 
 @media (max-width: 900px) {
@@ -394,4 +405,114 @@ img[src*="euskadi"] {
     width: 300px;
     height: 200px;
     object-fit: cover; /* Mantiene la proporción, cubre el área y recorta si es necesario */
+}
+
+/* Estilos para la sección de comentarios */
+.comments-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9); /* Consider var(--background-light) or a variant */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.darkmode .comments-section {
+    background: rgba(30, 30, 30, 0.9); /* Consider var(--background-dark) or a variant */
+}
+
+.comments-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(245, 245, 245, 0.7);
+    border-radius: 8px;
+}
+
+.darkmode .comments-container {
+    background: rgba(50, 50, 50, 0.7);
+}
+
+.comment-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: var(--ikurrina-white);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.darkmode .comment-item {
+    background: #333; /* Consider a variable */
+}
+
+.comment-item strong {
+    color: var(--ikurrina-red);
+}
+
+.darkmode .comment-item strong {
+    color: var(--ikurrina-green);
+}
+
+.comment-item p {
+    margin: 0.5rem 0 0 0;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--ikurrina-red);
+}
+
+.darkmode .form-group label {
+    color: var(--ikurrina-green);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.darkmode .form-group input,
+.darkmode .form-group textarea {
+    background: #444; /* Consider a variable */
+    color: var(--text-color-dark);
+    border-color: #555; /* Consider a variable */
+}
+
+.submit-btn {
+    background: var(--ikurrina-red);
+    color: var(--ikurrina-white);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+    align-self: flex-start;
+}
+
+.submit-btn:hover {
+    background: #c00510; /* Darker shade of red */
+}
+
+.darkmode .submit-btn {
+    background: var(--ikurrina-green);
+}
+
+.darkmode .submit-btn:hover {
+    background: #007a2f; /* Darker shade of green */
 }
