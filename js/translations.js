@@ -85,7 +85,7 @@ const translations = {
         historiaGetxo: "<strong>Getxo</strong> destaca por sus playas, acantilados y barrios históricos como Algorta. Es un lugar ideal para pasear junto al mar y descubrir la arquitectura señorial de sus palacetes.",
         historiaArtazaTitulo: "Palacio Artaza: Elegancia en Leioa",
         historiaArtaza: "El <strong>Palacio Artaza</strong>, construido a principios del siglo XX, es uno de los edificios más emblemáticos de Leioa y Bizkaia. Rodeado de jardines, fue residencia de la nobleza y hoy es un espacio para eventos y cultura."
-        // Claves para la sección de comentarios
+        , // Claves para la sección de comentarios
         commentsTitle: "Comentarios",
         loadingComments: "Cargando comentarios...",
         errorLoadingComments: "Error al cargar comentarios. Inténtalo más tarde.",
@@ -181,7 +181,7 @@ const translations = {
         historiaGetxo: "<strong>Getxo</strong> bere hondartzak, labarrak eta Algorta bezalako auzo historikoengatik nabarmentzen da. Itsasertzean paseatzeko eta jauregi dotoreen arkitektura ezagutzeko leku aproposa da.",
         historiaArtazaTitulo: "Artaza Jauregia: Leioako Dotorezia",
         historiaArtaza: "<strong>Artaza Jauregia</strong>, XX. mendearen hasieran eraikia, Leioako eta Bizkaiako eraikin enblematikoenetako bat da. Lorategiz inguratuta, nobleziaren egoitza izan zen eta gaur egun ekitaldi eta kulturarako gunea da."
-        // Iruzkinen atalerako gakoak
+        , // Iruzkinen atalerako gakoak
         commentsTitle: "Iruzkinak",
         loadingComments: "Iruzkinak kargatzen...",
         errorLoadingComments: "Errorea iruzkinak kargatzean. Saiatu berriro geroago.",
@@ -277,7 +277,7 @@ const translations = {
         historiaGetxo: "<strong>Getxo</strong> stands out for its beaches, cliffs, and historic neighborhoods like Algorta. It's an ideal place to walk by the sea and discover the stately architecture of its mansions.",
         historiaArtazaTitulo: "Artaza Palace: Elegance in Leioa",
         historiaArtaza: "<strong>Artaza Palace</strong>, built at the beginning of the 20th century, is one of the most emblematic buildings in Leioa and Bizkaia. Surrounded by gardens, it was once a noble residence and today is a venue for events and culture."
-        // Keys for comments section
+        , // Keys for comments section
         commentsTitle: "Comments",
         loadingComments: "Loading comments...",
         errorLoadingComments: "Error loading comments. Please try again later.",

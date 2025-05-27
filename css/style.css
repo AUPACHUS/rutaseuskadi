@@ -1,4 +1,4 @@
-/* Toque vasco: colores de la Ikurriña (rojo, verde, blanco) */
+en tod/* Toque vasco: colores de la Ikurriña (rojo, verde, blanco) */
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -384,4 +384,14 @@ body.darkmode .cuadro-historia strong {
         padding: 0.5rem;
         font-size: 0.95em;
     }
+}
+
+/* Ajustes de tamaño para imágenes específicas */
+img[src*="artaza"],
+img[src*="getxo"],
+img[src*="bizkaia"],
+img[src*="euskadi"] {
+    width: 300px;
+    height: 200px;
+    object-fit: cover; /* Mantiene la proporción, cubre el área y recorta si es necesario */
 }
