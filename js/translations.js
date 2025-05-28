@@ -94,7 +94,22 @@ const translations = {
         addCommentTitle: "Deja tu comentario",
         commentAuthorLabel: "Nombre:",
         commentTextLabel: "Comentario:",
-        submitCommentBtn: "Enviar Comentario"
+        submitCommentBtn: "Enviar Comentario",
+
+        // Claves para la página de registro y login
+        registerPageTitle: "Registro de Usuario",
+        loginPageTitle: "Iniciar Sesión",
+        registerTitle: "Crear una cuenta",
+        usernameLabel: "Nombre de Usuario:",
+        emailLabel: "Correo Electrónico:",
+        passwordLabel: "Contraseña:",
+        registerButton: "Registrarse",
+        alreadyAccount: "¿Ya tienes una cuenta?",
+        loginLink: "Inicia Sesión aquí",
+        fillAllFields: "Por favor, completa todos los campos.",
+        passwordTooShort: "La contraseña debe tener al menos 6 caracteres.",
+        registerError: "Error al registrarse. Inténtalo de nuevo.",
+        registerSuccessRedirect: "¡Registro exitoso! Redirigiendo a inicio de sesión..."
     },
     
     eu: {
@@ -191,7 +206,22 @@ const translations = {
         addCommentTitle: "Utzi zure iruzkina",
         commentAuthorLabel: "Izena:",
         commentTextLabel: "Iruzkina:",
-        submitCommentBtn: "Iruzkina Bidali"
+        submitCommentBtn: "Iruzkina Bidali",
+
+        // Claves para la página de registro y login (Euskera)
+        registerPageTitle: "Erabiltzaile Erregistroa",
+        loginPageTitle: "Saioa Hasi",
+        registerTitle: "Sortu kontu bat",
+        usernameLabel: "Erabiltzaile Izena:",
+        emailLabel: "Posta Elektronikoa:",
+        passwordLabel: "Pasahitza:",
+        registerButton: "Erregistratu",
+        alreadyAccount: "Baduzu kontu bat?",
+        loginLink: "Hasi saioa hemen",
+        fillAllFields: "Mesedez, bete eremu guztiak.",
+        passwordTooShort: "Pasahitzak gutxienez 6 karaktere izan behar ditu.",
+        registerError: "Errorea erregistratzean. Saiatu berriro.",
+        registerSuccessRedirect: "Erregistroa eginda! Saio hasierara birbideratzen..."
     },
     
     en: {
@@ -288,7 +318,22 @@ const translations = {
         addCommentTitle: "Leave your comment",
         commentAuthorLabel: "Name:",
         commentTextLabel: "Comment:",
-        submitCommentBtn: "Submit Comment"
+        submitCommentBtn: "Submit Comment",
+
+        // Keys for registration and login page (English)
+        registerPageTitle: "User Registration",
+        loginPageTitle: "Login",
+        registerTitle: "Create an account",
+        usernameLabel: "Username:",
+        emailLabel: "Email:",
+        passwordLabel: "Password:",
+        registerButton: "Sign Up",
+        alreadyAccount: "Already have an account?",
+        loginLink: "Login here",
+        fillAllFields: "Please fill in all fields.",
+        passwordTooShort: "Password must be at least 6 characters long.",
+        registerError: "Registration error. Please try again.",
+        registerSuccessRedirect: "Registration successful! Redirecting to login..."
     },
     
     // Añadiré más idiomas...
@@ -378,7 +423,22 @@ const translations = {
         addCommentTitle: "TODO: Translate addCommentTitle",
         commentAuthorLabel: "TODO: Translate commentAuthorLabel",
         commentTextLabel: "TODO: Translate commentTextLabel",
-        submitCommentBtn: "TODO: Translate submitCommentBtn"
+        submitCommentBtn: "TODO: Translate submitCommentBtn",
+
+        // Claves para la página de registro y login (Alemán)
+        registerPageTitle: "Benutzerregistrierung",
+        loginPageTitle: "Anmelden",
+        registerTitle: "Konto erstellen",
+        usernameLabel: "Benutzername:",
+        emailLabel: "E-Mail:",
+        passwordLabel: "Passwort:",
+        registerButton: "Registrieren",
+        alreadyAccount: "Haben Sie bereits ein Konto?",
+        loginLink: "Hier anmelden",
+        fillAllFields: "Bitte füllen Sie alle Felder aus.",
+        passwordTooShort: "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        registerError: "Registrierungsfehler. Bitte versuchen Sie es erneut.",
+        registerSuccessRedirect: "Registrierung erfolgreich! Weiterleitung zur Anmeldung..."
     },
     
     fr: {
@@ -415,6 +475,17 @@ const translations = {
         // Historia (común)
         // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
         // Claves para la sección de comentarios
+        commentsTitle: "TODO: Translate commentsTitle",
+        loadingComments: "TODO: Translate loadingComments",
+        errorLoadingComments: "TODO: Translate errorLoadingComments",
+        noCommentsYet: "TODO: Translate noCommentsYet",
+        addCommentTitle: "TODO: Translate addCommentTitle",
+        commentAuthorLabel: "TODO: Translate commentAuthorLabel",
+        commentTextLabel: "TODO: Translate commentTextLabel",
+        submitCommentBtn: "TODO: Translate submitCommentBtn",
+        registerPageTitle: "TODO: Translate registerPageTitle",
+        loginPageTitle: "TODO: Translate loginPageTitle",
+        // ... y así sucesivamente para todas las nuevas claves en francés
         // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
@@ -450,6 +521,10 @@ const translations = {
         // Historia (común)
         // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
         // Claves para la sección de comentarios
+        commentsTitle: "TODO: Translate commentsTitle",
+        // ... y así sucesivamente para todas las nuevas claves en ruso
+        registerPageTitle: "TODO: Translate registerPageTitle",
+        loginPageTitle: "TODO: Translate loginPageTitle",
         // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
@@ -485,6 +560,10 @@ const translations = {
         // Historia (común)
         // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
         // Claves para la sección de comentarios
+        commentsTitle: "TODO: Translate commentsTitle",
+        // ... y así sucesivamente para todas las nuevas claves en árabe
+        registerPageTitle: "TODO: Translate registerPageTitle",
+        loginPageTitle: "TODO: Translate loginPageTitle",
         // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     },
     
@@ -520,6 +599,10 @@ const translations = {
         // Historia (común)
         // ... (Añadir TODAS las claves de historia con "TODO: Translate...")
         // Claves para la sección de comentarios
+        commentsTitle: "TODO: Translate commentsTitle",
+        // ... y así sucesivamente para todas las nuevas claves en chino
+        registerPageTitle: "TODO: Translate registerPageTitle",
+        loginPageTitle: "TODO: Translate loginPageTitle",
         // ... (Añadir TODAS las claves de comentarios con "TODO: Translate...")
     }
 };

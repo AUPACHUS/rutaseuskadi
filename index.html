@@ -67,8 +67,75 @@
         <p data-key="busca">Ya sea que busques aventuras al aire libre, gastronomía local o actividades para toda la familia, aquí encontrarás lo que necesitas.</p>
         <p data-key="hazclic">Haz clic en los enlaces a los mapas en la parte izquierda para poder buscar rutas acotadas a ese territorio.</p>
         <p data-key="disfruta">¡Disfruta de tu viaje!</p>
-        <p data-key="contacta">Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.</p>
-        
+    
+        <div id="auth-section">
+    <h2>Autenticación</h2>
+    <div id="user-info" style="display:none;">
+        <p>Bienvenido, <span id="username-display"></span>. <button id="logout-btn">Cerrar Sesión</button></p>
+    </div>
+
+    <div id="login-form-container">
+        <h3>Iniciar Sesión</h3>
+        <form id="login-form">
+            <div>
+                <label for="login-username">Usuario:</label>
+                <input type="text" id="login-username" required>
+            </div>
+            <div>
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
+            <p>¿No tienes cuenta? <a href="#" id="show-register-link">Regístrate</a></p>
+        </form>
+    </div>
+
+    <div id="register-form-container" style="display:none;">
+        <h3>Registrarse</h3>
+        <form id="register-form">
+            <div>
+                <label for="register-username">Usuario:</label>
+                <input type="text" id="register-username" required>
+            </div>
+            <div>
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" required>
+            </div>
+            <div>
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" required>
+            </div>
+            <button type="submit">Registrarse</button>
+            <p>¿Ya tienes cuenta? <a href="#" id="show-login-link">Inicia Sesión</a></p>
+        </form>
+    </div>
+    <p id="auth-message" style="color: red;"></p>
+</div>
+
+<!-- Tu sección de comentarios existente -->
+<section class="comments-section">
+    <h2 data-key="commentsTitle">Comentarios</h2>
+    <div id="comment-form-wrapper"> <!-- Wrapper para mostrar/ocultar form -->
+        <h3 data-key="addCommentTitle">Deja tu comentario</h3>
+        <form id="comment-form">
+            <!-- El campo de autor se puede ocultar o eliminar si el usuario está logueado -->
+            <!-- <div class="form-group" id="comment-author-group">
+                <label for="comment-author" data-key="commentAuthorLabel">Nombre:</label>
+                <input type="text" id="comment-author" required>
+            </div> -->
+            <div class="form-group">
+                <label for="comment-text" data-key="commentTextLabel">Comentario:</label>
+                <textarea id="comment-text" rows="4" required maxlength="500"></textarea>
+                <span id="char-counter">500 caracteres restantes</span>
+            </div>
+            <button type="submit" data-key="submitCommentBtn">Enviar Comentario</button>
+        </form>
+    </div>
+    <p id="login-to-comment-msg" style="display:none;">Por favor, <a href="#" id="login-prompt-link">inicia sesión</a> para dejar un comentario.</p>
+    <div id="comments-list">
+        <p data-key="loadingComments">Cargando comentarios...</p>
+    </div>
+</section>
 
         <div class="cuadro-historia">
             <h2 data-key="historiaEuskadiTitulo">Euskadi: Tierra de Historia y Cultura</h2>
@@ -118,29 +185,6 @@
                 <img src="img/artaza_foto4.jpg" alt="Vista del Palacio Artaza">
             </div>
         </div>
-        <!-- Sección de Comentarios -->
-<section class="comments-section">
-    <h2 data-key="commentsTitle">Comentarios</h2>
-    
-    <div id="comments-list" class="comments-container">
-        <!-- Los comentarios se cargarán aquí dinámicamente -->
-        <p data-key="loadingComments">Cargando comentarios...</p>
-    </div>
-    
-    <form id="comment-form" class="comment-form">
-        <h3 data-key="addCommentTitle">Deja tu comentario</h3>
-        <div class="form-group">
-            <label for="comment-author" data-key="commentAuthorLabel">Nombre:</label>
-            <input type="text" id="comment-author" name="author" required>
-        </div>
-        <div class="form-group">
-            <label for="comment-text" data-key="commentTextLabel">Comentario:</label>
-            <textarea id="comment-text" name="text" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn" data-key="submitCommentBtn">Enviar Comentario</button>
-    </form>
-</section>
-        <!-- Fin de la sección de comentarios -->
     </main>
     <footer>
         <p>© 2022 - Rutas País Vasco-AUPACHUS</p>

@@ -1,11 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const commentsList = document.getElementById('comments-list');
     const commentForm = document.getElementById('comment-form');
-    const commentAuthorInput = document.getElementById('comment-author');
+    // const commentAuthorInput = document.getElementById('comment-author'); // Ya no es necesario si el usuario está logueado
     const commentTextInput = document.getElementById('comment-text');
     const charCounter = document.getElementById('char-counter');
 
+    // Elementos de autenticación
+    const authSection = document.getElementById('auth-section');
+    const userInfoDiv = document.getElementById('user-info');
+    const usernameDisplay = document.getElementById('username-display');
+    const logoutBtn = document.getElementById('logout-btn');
+    const loginFormContainer = document.getElementById('login-form-container');
+    const registerFormContainer = document.getElementById('register-form-container');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const showRegisterLink = document.getElementById('show-register-link');
+    const showLoginLink = document.getElementById('show-login-link');
+    const authMessage = document.getElementById('auth-message');
+    const commentFormWrapper = document.getElementById('comment-form-wrapper');
+    const loginToCommentMsg = document.getElementById('login-to-comment-msg');
+    const loginPromptLink = document.getElementById('login-prompt-link');
+
     const apiUrl = 'http://localhost:3000/api/comments';
+    const authApiUrl = 'http://localhost:3000/api/auth';
 
     // Contador de caracteres
     if (commentTextInput && charCounter) {
@@ -19,6 +36,109 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Lógica de Autenticación ---
+    function updateAuthState() {
+        const token = localStorage.getItem('authToken');
+        const username = localStorage.getItem('username');
+
+        if (token && username) {
+            userInfoDiv.style.display = 'block';
+            usernameDisplay.textContent = username;
+            loginFormContainer.style.display = 'none';
+            registerFormContainer.style.display = 'none';
+            authMessage.textContent = '';
+            commentFormWrapper.style.display = 'block';
+            loginToCommentMsg.style.display = 'none';
+            // if (document.getElementById('comment-author-group')) {
+            //     document.getElementById('comment-author-group').style.display = 'none'; // Ocultar campo de autor
+            // }
+        } else {
+            userInfoDiv.style.display = 'none';
+            loginFormContainer.style.display = 'block'; // Mostrar login por defecto
+            registerFormContainer.style.display = 'none';
+            commentFormWrapper.style.display = 'none';
+            loginToCommentMsg.style.display = 'block';
+            // if (document.getElementById('comment-author-group')) {
+            //     document.getElementById('comment-author-group').style.display = 'block'; // Mostrar campo autor si no logueado
+            // }
+        }
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            try {
+                const response = await fetch(`${authApiUrl}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Error al iniciar sesión');
+                
+                localStorage.setItem('authToken', data.accessToken);
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('userId', data.userId);
+                updateAuthState();
+                loginForm.reset();
+            } catch (error) {
+                authMessage.textContent = error.message;
+            }
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            try {
+                const response = await fetch(`${authApiUrl}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Error al registrarse');
+                
+                authMessage.textContent = 'Registro exitoso. Por favor, inicia sesión.';
+                authMessage.style.color = 'green';
+                registerForm.reset();
+                showLoginForm(); // Mostrar formulario de login después del registro
+            } catch (error) {
+                authMessage.textContent = error.message;
+                authMessage.style.color = 'red';
+            }
+        });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('username');
+            localStorage.removeItem('userId');
+            updateAuthState();
+        });
+    }
+
+    function showLoginForm() {
+        loginFormContainer.style.display = 'block';
+        registerFormContainer.style.display = 'none';
+        authMessage.textContent = '';
+    }
+    function showRegisterForm() {
+        loginFormContainer.style.display = 'none';
+        registerFormContainer.style.display = 'block';
+        authMessage.textContent = '';
+    }
+
+    if (showRegisterLink) showRegisterLink.addEventListener('click', (e) => { e.preventDefault(); showRegisterForm(); });
+    if (showLoginLink) showLoginLink.addEventListener('click', (e) => { e.preventDefault(); showLoginForm(); });
+    if (loginPromptLink) loginPromptLink.addEventListener('click', (e) => { e.preventDefault(); showLoginForm(); authSection.scrollIntoView(); });
 
     // Función para mostrar comentarios con anidación
     function displayComments(allComments, parentId = null, level = 0) {
@@ -60,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headerDiv.classList.add('comment-header');
 
         const authorElement = document.createElement('strong');
-        authorElement.textContent = comment.author;
+        authorElement.textContent = comment.author_username; // Usar el username del join
 
         const ratingElement = document.createElement('span');
         ratingElement.classList.add('comment-rating');
@@ -101,12 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function voteComment(commentId, action) {
         try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Debes iniciar sesión para votar.');
+                return;
+            }
             const response = await fetch(`${apiUrl}/${commentId}/vote`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ action })
             });
-            
+
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
             }
@@ -119,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showReplyForm(parentId, parentCommentElement) {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            alert('Debes iniciar sesión para responder.');
+            return;
+        }
+
         // Ocultar otros formularios de respuesta si existen
         document.querySelectorAll('.reply-form').forEach(form => form.remove());
 
@@ -128,10 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
         replyForm.style.marginTop = '10px';
 
         replyForm.innerHTML = `
-            <div class="form-group">
+            <!-- El campo de autor para respuestas ya no es necesario si se usa el usuario logueado -->
+            <!-- <div class="form-group">
                 <label for="reply-author-${parentId}" data-key="commentAuthorLabel">Nombre:</label>
                 <input type="text" id="reply-author-${parentId}" required>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="reply-text-${parentId}" data-key="commentTextLabel">Comentario:</label>
                 <textarea id="reply-text-${parentId}" rows="3" required maxlength="500"></textarea>
@@ -143,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         parentCommentElement.appendChild(replyForm);
 
-        const replyAuthorInput = replyForm.querySelector(`#reply-author-${parentId}`);
+        // const replyAuthorInput = replyForm.querySelector(`#reply-author-${parentId}`);
         const replyTextInput = replyForm.querySelector(`#reply-text-${parentId}`);
         const replyCharCounter = replyForm.querySelector(`#reply-char-counter-${parentId}`);
 
@@ -159,16 +291,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         replyForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const author = replyAuthorInput.value.trim();
+            // const author = replyAuthorInput.value.trim(); // Ya no se necesita
             const text = replyTextInput.value.trim();
+            const token = localStorage.getItem('authToken');
 
-            if (author && text && text.length <= 500) {
+            if (!token) { // Doble chequeo, aunque el form no debería mostrarse
+                alert('Error: No estás autenticado.');
+                return;
+            }
+
+            if (text && text.length <= 500) {
                 try {
                     const response = await fetch(apiUrl, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                         body: JSON.stringify({ 
-                            author, 
                             text, 
                             parent_id: parentId 
                         })
@@ -223,24 +360,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (commentForm) {
         commentForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const token = localStorage.getItem('authToken');
 
-            const authorElement = document.createElement('strong');
-            const author = commentAuthorInput.value.trim();
+            if (!token) {
+                alert('Debes iniciar sesión para comentar.');
+                // Opcionalmente, podrías redirigir al formulario de login o mostrarlo.
+                // showLoginForm();
+                // authSection.scrollIntoView();
+                return;
+            }
+
             const text = commentTextInput.value.trim();
 
-            if (author && text && text.length <= 500) {
+            if (text && text.length <= 500) {
                 try {
                     const response = await fetch(apiUrl, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ author, text }) // parent_id es null por defecto para comentarios principales
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({ text }) // parent_id es null por defecto, author viene del token
                     });
 
                     if (!response.ok) {
                         throw new Error(`Error HTTP: ${response.status}`);
                     }
 
-                    commentAuthorInput.value = '';
+                    // commentAuthorInput.value = ''; // Ya no se usa
                     commentTextInput.value = '';
                     if (charCounter) { // Resetear contador
                         charCounter.textContent = '500 caracteres restantes';
@@ -267,8 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    updateAuthState(); // Comprobar estado de autenticación al cargar
     fetchComments();
 });
-
 // Esta variable se espera que sea establecida globalmente por translations.js
 let currentLanguage = 'es'; // O el idioma por defecto/detectado

@@ -105,14 +105,22 @@ app.get('/api/comments', (req, res) => {
 // POST /api/comments - Añadir un nuevo comentario (con validación)
 app.post('/api/comments', (req, res) => {
     const { author, text, parent_id = null, rating = 0 } = req.body;
-
+        
     if (!author || !text) {
         return res.status(400).json({ error: 'El autor y el texto del comentario son obligatorios.' });
     }
-
+            if (typeof author !== 'string' || typeof text !== 'string') {
+                return res.status(400).json({ error: 'El autor y el texto deben ser cadenas de texto.' });
+            }
     if (text.length > 500) {
         return res.status(400).json({ error: 'El comentario no puede exceder los 500 caracteres.' });
     }
+            if (parent_id !== null && (typeof parent_id !== 'number' || !Number.isInteger(parent_id))) {
+                return res.status(400).json({ error: 'parent_id debe ser un número entero o null.' });
+            }
+            if (typeof rating !== 'number' || !Number.isInteger(rating)) { // Aunque el default es 0, el cliente podría enviar algo incorrecto
+                return res.status(400).json({ error: 'rating debe ser un número entero.' });
+            }
 
     const stmt = db.prepare("INSERT INTO comments (author, text, parent_id, rating, status) VALUES (?, ?, ?, ?, ?)");
     stmt.run(author, text, parent_id, rating, 'pending', function(err) {

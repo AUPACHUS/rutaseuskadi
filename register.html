@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="registerPageTitle">Registro de Usuario</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Asegúrate que la ruta a tu CSS es correcta -->
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1 data-key="mainTitle">Rutas por el País Vasco</h1>
+    </header>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="home-btn" data-key="inicio">Inicio</a>
+        </div>
+        <div class="navbar-right">
+            <div class="lang-buttons">
+                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="eu">EU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <!-- Añade más botones de idioma si es necesario -->
+            </div>
+            <a href="login.html" class="contact-btn" data-key="loginPageTitle">Iniciar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="register-section" class="auth-form-section">
+            <h2 data-key="registerTitle">Crear una cuenta</h2>
+            <form id="register-form-page">
+                <div class="form-group">
+                    <label for="register-username" data-key="usernameLabel">Nombre de Usuario:</label>
+                    <input type="text" id="register-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email" data-key="emailLabel">Correo Electrónico:</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password" data-key="passwordLabel">Contraseña:</label>
+                    <input type="password" id="register-password" name="password" required minlength="6">
+                </div>
+                <button type="submit" class="submit-btn" data-key="registerButton">Registrarse</button>
+            </form>
+            <p id="register-message" class="auth-message"></p>
+            <p class="auth-link">
+                <span data-key="alreadyAccount">¿Ya tienes una cuenta?</span>
+                <a href="login.html" data-key="loginLink">Inicia Sesión aquí</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rutas por el País Vasco. Todos los derechos reservados.</p>
+        <p><a href="mailto:artemnugi@gmail.com" data-key="contacto">Contáctame</a></p>
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/register-page.js"></script>
+    <!-- Si tienes un script general para la navegación o el dark mode, inclúyelo también -->
+    <!-- <script src="js/main.js"></script> -->
+</body>
+</html>
+
+
+<!-- NOTA:
+    - He añadido data-keys para la internacionalización. Deberás añadir estas claves a tu `translations.js`.
+    - He asumido que tienes una página `login.html`. Si no, puedes cambiar el enlace.
+    - La estructura del header/nav/footer es un ejemplo, ajústala a tu diseño.
+    - Añade estilos para `.auth-form-section`, `.form-group`, `.submit-btn`, `.auth-message`, `.auth-link` en tu `style.css`.
+-->
