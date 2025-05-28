@@ -1,9 +1,11 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose(); // .verbose() para mensajes de error más detallados
 const path = require('path'); // Módulo para trabajar con rutas de archivos
+const cors = require('cors'); // Importar el paquete cors
 
 const app = express();
 const port = 3000; // Puerto en el que correrá el servidor backend
+app.use(cors()); // Habilitar CORS para todas las rutas
 
 // Middleware para parsear JSON en las peticiones (para cuando envíes datos desde el frontend)
 app.use(express.json());
@@ -57,18 +59,26 @@ app.post('/api/comments', (req, res) => {
     const stmt = db.prepare("INSERT INTO comments (author, text) VALUES (?, ?)");
     stmt.run(author, text, function(err) { // Usar function() para acceder a this.lastID
         if (err) {
+            stmt.finalize();
             res.status(500).json({ error: err.message });
             return;
         }
-        // Devolver el comentario recién creado (opcional, pero útil)
-        res.status(201).json({
-            id: this.lastID,
-            author: author,
-            text: text,
-            timestamp: new Date().toISOString() // Aproximación, SQLite lo guarda con CURRENT_TIMESTAMP
+        const newCommentId = this.lastID;
+        stmt.finalize();
+
+        // Obtener el comentario recién insertado para devolverlo con el timestamp de la BD
+        db.get("SELECT id, author, text, strftime('%Y-%m-%d %H:%M:%S', timestamp) as timestamp FROM comments WHERE id = ?", newCommentId, (err, row) => {
+            if (err) {
+                // El comentario se insertó, pero hubo un error al recuperarlo.
+                // Se podría registrar el error y devolver un 201 con datos parciales o un mensaje específico.
+                console.error("Error retrieving comment after insert:", err.message);
+                return res.status(201).json({ message: "Comment created, but failed to retrieve full details.", id: newCommentId });
+            }
+            if (!row) return res.status(404).json({ error: "Comment created, but could not be found." });
+            
+            res.status(201).json(row);
         });
     });
-    stmt.finalize();
 });
 
 // Iniciar el servidor
